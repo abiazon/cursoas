@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Controle de Cursos</title>
+        <link type="text/css" rel="stylesheet" href="/css/estilos.css" />
+    </h:head>
+    <h:body>
+        <h:form id="formulario">
+            <p:panel header="Incluir Cursos">
+                <h:panelGrid columns="3" id="grid" width="100%" columnClasses="texto,form,messages">
+                    <h:outputText value="Nome Curso" />
+                    <p:inputText id="nome" value="#{cntrCurso.nome}" size="50" required="true" requiredMessage="Nome Obrigatório"/>
+                    <p:message for="nome"/>
+                    <h:outputText value="Data Inicio"/>
+                    <p:calendar id="dti" value="#{cntrCurso.datainicio}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Data Inicio Obrigatória"/>
+                    <p:message for="dti" />
+                    <h:outputText value="Data Final"/>
+                    <p:calendar id="dtf" value="#{cntrCurso.datafim}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Data Fim Obrigatória"/>
+                    <p:message for="dtf" />
+                    <h:outputText value="Valor Curso"/>
+                    <p:inputNumber id="preco" converter="javax.faces.Double" value="#{cntrCurso.valorcurso}" size="10" required="true" requiredMessage="Valor Obrigatório"
+                                   symbol="R$ " decimalSeparator="," thousandSeparator="." style="text-align:center" />
+                    <p:message for="preco" />
+
+                    <p:commandButton value="Gravar" action="#{cntrCurso.addcursco()}" update=":formtable:tabelaCurso,grid"/>
+                    <p:commandButton value="Limpar" type="reset"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+
+        <h:form id="formtable">
+            <p:dataTable style="width:100%" id="tabelaCurso" value="#{cntrCurso.listarCurso}" emptyMessage="Não há registros" var="cur" paginator="true" rows="10">
+                <f:facet name="header">
+                    Lista de Cursos Cadastrados
+                </f:facet>
+                <p:column headerText="Nome" width="60%" filterMaxLength="20" sortBy="#{cur.nome}" filterBy="#{cur.nome}">
+                    <h:outputText value="#{cur.nome}"/>
+                </p:column>
+                <p:column headerText="Data Início" filterBy="#{cur.datainicio}">
+                    <h:outputText value="#{cur.datainicio}">
+                        <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Data Fim" filterBy="#{cur.datafim}">
+                    <h:outputText value="#{cur.datafim}">
+                        <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Valor Curso" filterBy="#{cur.valorcurso}">
+                    <div align="right">
+                        <h:outputText value="#{cur.valorcurso}">
+                            <f:convertNumber currencySymbol="R$" type="currency" />
+                        </h:outputText>
+                    </div> 
+                </p:column>
+                <p:column>
+                    <p:commandButton action="#{cntrCurso.excluirCurso()}" icon="ui-icon-closethick" update="tabelaCurso" />
+                    <p:commandButton actionListener="#{cntrCurso.prepararalterarCurso()}" icon="ui-icon-pencil" oncomplete="PF('cursoDialog').show()" update=":formdialog:display" >
+                    </p:commandButton>
+                </p:column>
+                <f:facet name="footer">
+                    <h:outputText value="Existem " />
+                    <h:outputText value="#{cntrCurso.qtdcursos}" />
+                    <h:outputText value=" Cursos cadastrados. " />
+                </f:facet>
+            </p:dataTable> 
+        </h:form>
+
+        <p:dialog header="Detalhes do Curso" widgetVar="cursoDialog" id="cursoDlg" resizable="true" modal="true">
+            <h:form id="formdialog">
+                <h:panelGrid id="display" columns="2" >
+                    <h:outputText value="Nome" />
+                    <h:inputText value="#{cntrCurso.curso.nome}" style="font-weight:bold"/>
+                    <h:outputText value="Data Inicial" />
+                    <p:calendar value="#{cntrCurso.curso.datainicio}" style="font-weight:bold" pattern="dd/MM/yyyy">
+                    </p:calendar>
+                    <h:outputText value="Data Final" />
+                    <p:calendar value="#{cntrCurso.curso.datafim}" style="font-weight:bold" pattern="dd/MM/yyyy">
+                    </p:calendar>
+                    <h:outputText value="Preço" />
+                    <h:inputText value="#{cntrCurso.curso.valorcurso}" style="font-weight:bold"/>
+                    <p:commandButton onclick="cursoDialog.hide()" value="Alterar" icon="ui-icon-check" action="#{cntrCurso.alterarCurso}" update=":formtable:tabelaCurso" /> 
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>
+
+

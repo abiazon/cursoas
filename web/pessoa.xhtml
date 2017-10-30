@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Controle de Pessoas</title>
+        <link type="text/css" rel="stylesheet" href="/css/estilos.css" />
+    </h:head>
+    <h:body>
+        <h:form id="formulario">
+            <p:panel header="Incluir Pessoas">
+                <h:panelGrid columns="3" id="grid" width="70%" columnClasses="texto,form,messages">
+                    <h:outputText value="Nome " />
+                    <p:inputText id="nome" value="#{cntrPessoa.nome}" size="80" required="true" requiredMessage="Nome Obrigatório"/>
+                    <p:message for="nome"/>
+                    <h:outputText value="Endereço" />
+                    <p:inputText id="endereco" value="#{cntrPessoa.endereco}" size="80" required="true" requiredMessage="Endereço ObrigatÃ³rio"/>
+                    <p:message for="endereco"/>
+                    <h:outputText value="Número da Residência" />
+                    <p:inputNumber id="numeroResidencia" converter="javax.faces.Integer" decimalPlaces="0" value="#{cntrPessoa.numeroresidencia}" size="4" maxlength="5" required="true" requiredMessage="Número Obrigatório">
+                    </p:inputNumber>
+                    <p:message for="numeroResidencia"/>
+                    <h:outputText value="CEP" />
+                    <p:inputMask id="cep" value="#{cntrPessoa.cep}" size="10" mask="99.999-999" required="true" requiredMessage="CEP Obrigatório"/>
+                    <p:message for="cep"/>
+                    <h:outputText value="Estado" /> 
+                    <h:selectOneMenu id="comboEstados" value="#{cntrPessoa.estado}">  
+                        <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{cntrPessoa.listestados}" var="estados" itemLabel="#{estados.nomeestado}" itemValue="#{estados.idunidFed}" />
+<!--                        <f:selectItem itemLabel="PR - Paraná" itemValue="PR" />
+                        <f:selectItem itemLabel="AL - Alagoas" itemValue="AL" />
+                        <f:selectItem itemLabel="AP -Amapá" itemValue="AP" />
+                        <f:selectItem itemLabel="AM - Amazonas" itemValue="AM" />
+                        <f:selectItem itemLabel="BA - Bahia" itemValue="BA" />
+                        <f:selectItem itemLabel="CE - Ceará" itemValue="CE" />
+                        <f:selectItem itemLabel="DF - Distrito Federa" itemValue="DF" />
+                        <f:selectItem itemLabel="ES - Espírito Santo" itemValue="ES" />
+                        <f:selectItem itemLabel="GO - Goiás" itemValue="GO" />
+                        <f:selectItem itemLabel="MA - Maranhão" itemValue="MA" />
+                        <f:selectItem itemLabel="MT - Mato Grosso" itemValue="MT" />
+                        <f:selectItem itemLabel="MS - Mato Grosso do Sul" itemValue="MS" />
+                        <f:selectItem itemLabel="MG - Pará" itemValue="MG" />
+                        <f:selectItem itemLabel="PB - Paraíba" itemValue="PB" />
+                        <f:selectItem itemLabel="PE - Pernambuco" itemValue="PE" />
+                        <f:selectItem itemLabel="PI - Piauí" itemValue="PI" />
+                        <f:selectItem itemLabel="RJ - Rio de Janeiro" itemValue="RJ" />
+                        <f:selectItem itemLabel="RN - Rio Grande do Norte" itemValue="RN" />
+                        <f:selectItem itemLabel="RS - Rio Grande do Sul" itemValue="RS" />
+                        <f:selectItem itemLabel="RO - Rondônia" itemValue="RO" />
+                        <f:selectItem itemLabel="RR - Roraima" itemValue="RR" />
+                        <f:selectItem itemLabel="SC - Santa Catarina" itemValue="SC" />
+                        <f:selectItem itemLabel="SP - São Paulo" itemValue="SP" />
+                        <f:selectItem itemLabel="SE - Sergipe" itemValue="SE" />
+                        <f:selectItem itemLabel="TO - Tocantins" itemValue="TO" />-->
+                        <p:ajax 
+                            listener="#{cntrPessoa.comboEstadoChange}"
+                            event="change"  
+                            update="comboCidade"  
+                            process="comboEstados" />  
+                    </h:selectOneMenu>
+                    <p:message for="comboEstados" />
+                    <h:outputText value="Cidade" />
+                    <h:selectOneMenu id="comboCidade" value="#{cntrPessoa.cidade}">  
+                        <f:selectItem itemLabel="Selecione" itemValue="0" />  
+                        <f:selectItems value="#{cntrPessoa.listacidade}" var="cidades" itemLabel="#{cidades.nomedesc}" itemValue="#{cidades.nomedesc}" />
+                    </h:selectOneMenu>
+                    <p:message for="comboCidade" />
+                    <h:outputText value="Telefone" />
+                    <p:inputMask id="telefone" value="#{cntrPessoa.telefone}" mask="(99)99999-9999" size="15" required="true" requiredMessage="Telefone Obrigatório"/>
+                    <p:message for="telefone"/>
+                    <h:outputText value="Bairro" />
+                    <p:inputText id="bairro" value="#{cntrPessoa.bairro}" size="50" required="true" requiredMessage="Bairro Obrigatório"/>
+                    <p:message for="bairro"/>
+                    <h:outputText value="Data Nascimento" />
+                    <p:calendar id="dataNascimento" value="#{cntrPessoa.datanascimento}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Data Nascimento ObrigatÃ³rio"/>
+                    <p:message for="dataNascimento"/>
+                    <h:outputText value="Email" />
+                    <h:inputText id="email" value="#{cntrPessoa.email}" required="true" label="Email" validatorMessage="E-mail incorreto">
+                        <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                    </h:inputText>
+                    <p:message for="email" />
+                    <h:outputText value="CPF" />
+                    <p:inputMask id="cpf" value="#{cntrPessoa.cpf}" mask="999.999.999-99" converter="cpfConverter" required="true">
+                        <f:validator validatorId="cpfValidator"/>
+                    </p:inputMask> 
+                    <h:message for="cpf" /> 
+                    <p:outputLabel id="sexo" for="sexo" value="Sexo:" />
+                    <p:selectOneRadio id="console" value="#{cntrPessoa.sexo}" >
+                        <f:selectItem itemLabel="M" itemValue="M" />
+                        <f:selectItem itemLabel="F" itemValue="F" />
+                    </p:selectOneRadio>
+                    <p:message for="sexo"/> 
+                    <h:outputText value="Apelido" />
+                    <p:inputText id="apelido" value="#{cntrPessoa.apelido}" size="50" required="true" requiredMessage="Apelido Obrigattório">
+                        <f:validator validatorId="apelidoValidator"/>
+                    </p:inputText>
+                    <p:message for="apelido"/>
+                    <p:commandButton value="Gravar" action="#{cntrPessoa.addpessoa()}" update=":formtable:tabelaPessoa,grid"/>
+                    <p:commandButton value="Limpar" type="reset"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+        
+        <h:form id="formtable">
+            <p:dataTable style="width:80%" id="tabelaPessoa" value="#{cntrPessoa.listarPessoa}" emptyMessage="NÃ£o hÃ¡ registros" var="pes" paginator="true" rows="10">
+                <f:facet name="header">
+                    Lista de Pessoas Cadastrados
+                </f:facet>
+                <p:column headerText="Nome"  filterMaxLength="20" sortBy="#{pes.nome}" filterBy="#{pes.nome}">
+                    <h:outputText value="#{pes.nome}"/>
+                </p:column>
+                <p:column headerText="Email"  filterMaxLength="20" sortBy="#{pes.email}" filterBy="#{pes.email}">
+                    <h:outputText value="#{pes.email}"/>
+                </p:column>
+                <p:column headerText="Apelido"  filterMaxLength="20" sortBy="#{pes.apelido}" filterBy="#{pes.apelido}">
+                    <h:outputText value="#{pes.apelido}"/>
+                </p:column>
+                <p:column>
+                    <p:commandButton action="#{cntrPessoa.excluirPessoa()}" icon="ui-icon-closethick"  update="tabelaPessoa" />
+ <!--                    <p:commandButton value="Alterar" action="#{cntrPessoa.prepararalterarPessoa()}" />  -->
+                    <p:commandButton actionListener="#{cntrPessoa.prepararalterarPessoa()}" icon="ui-icon-pencil" oncomplete="PF('pessoaDialog').show()" update=":formdialog:display" >
+                        <!--value="Alterar" icon="ui-icon-search"-->
+                    </p:commandButton>
+                </p:column>
+                <f:facet name="footer">
+                    <h:outputText value="Existem " />
+                    <h:outputText value="#{cntrPessoa.qtdpessoas}" />
+                    <h:outputText value=" Pessoas cadastrados. " />
+                </f:facet>
+            </p:dataTable> 
+        </h:form>
+
+        <p:dialog header="Detalhes do Participante" widgetVar="pessoaDialog" id="pessoaDlg" resizable="true" modal="true">
+            <h:form id="formdialog">
+                <h:panelGrid id="display" columns="2" >
+                    <h:outputText value="Nome" />
+                    <h:inputText value="#{cntrPessoa.pessoa.nome}" style="font-weight:bold"/>
+                    <h:outputText value="EndereÃ§o" />
+                    <h:inputText value="#{cntrPessoa.pessoa.endereco}" style="font-weight:bold"/>
+                    <h:outputText value="Cidade" />
+                    <h:inputText value="#{cntrPessoa.pessoa.cidade}" style="font-weight:bold"/>
+                    <h:outputText value="Estado" />
+                    <h:inputText value="#{cntrPessoa.pessoa.estado}" style="font-weight:bold"/>
+                    <h:outputText value="Telefone" />
+                    <h:inputText value="#{cntrPessoa.pessoa.telefone}" style="font-weight:bold"/>
+                    <h:outputText value="Bairro" />
+                    <h:inputText value="#{cntrPessoa.pessoa.bairro}" style="font-weight:bold"/>
+                    <h:outputText value="Data Nasc" />
+                    <p:calendar value="#{cntrPessoa.pessoa.datanascimento}" style="font-weight:bold" pattern="dd/MM/yyyy">
+                    </p:calendar>
+                    <h:outputText value="E-mail" />
+                    <h:inputText value="#{cntrPessoa.pessoa.email}" style="font-weight:bold" />
+                    <h:outputText value="Número" />
+                    <h:inputText value="#{cntrPessoa.pessoa.numeroresidencia}" style="font-weight:bold"/> 
+                    <p:commandButton onclick="pessoaDialog.hide()" value="Alterar" icon="ui-icon-check" actionListener="#{cntrPessoa.alterarPessoa()}" update=":formtable:tabelaPessoa" /> 
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+
+</html>
+

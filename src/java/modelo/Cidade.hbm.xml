@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/10/2017 08:09:14 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Cidade" table="cidade" schema="public" optimistic-lock="version">
+        <id name="idcidade" type="int">
+            <column name="idcidade" />
+            <generator class="assigned" />
+        </id>
+        <property name="cidadeIbge" type="java.lang.Integer">
+            <column name="cidade_ibge" />
+        </property>
+        <property name="idunidFed" type="string">
+            <column name="idunid_fed" length="2" />
+        </property>
+        <property name="nomedesc" type="string">
+            <column name="nomedesc" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+       <title>Gerenciador de Cursos</title>
+    </h:head>
+    <h:body>
+        <h1>Gerenciador de Cursos</h1>
+        <h:form>
+            <p:panel header="Incluir Cursos">
+                <h:panelGrid columns="3" id="grid">
+                    <h:outputText value="Curso" />
+                    <p:inputText id="nome" value="#{cntrCurso.curso.nome}"/>
+                    <p:message for="nome" />
+                    <h:outputText value="Data Inicio" />
+                    <p:calendar id="dti" value="#{cntrCurso.curso.datainicio}"/>
+                    <p:message for="dti" />
+                    <h:outputText value="Data Fim " />
+                    <p:calendar id="dtf" value="#{cntrCurso.curso.datafim}"/>
+                    <p:message for="dtf" />
+                    <h:outputText value="Valor Curso" />
+                    <h:inputText id="vlr" value="#{cntrCurso.curso.valorcurso}"/>
+                    <p:message for="vlr" />
+                    <h:commandButton action="#{cntrCurso.alterarCurso()}" value="Alterar Curso" />
+                    <h:commandButton action="index" value="Voltar"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

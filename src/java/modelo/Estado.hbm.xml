@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/10/2017 08:09:14 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="modelo.Estado" table="estado" schema="public" optimistic-lock="version">
+    <id name="idunidFed" type="string">
+      <column length="2" name="idunid_fed"/>
+      <generator class="assigned"/>
+    </id>
+   <property name="nomeestado" type="string">
+      <column length="100" name="nomeestado"/>
+    </property> 
+  </class>
+</hibernate-mapping>

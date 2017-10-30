@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/10/2017 08:09:14 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Pessoa" table="pessoa" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="nome" type="string">
+            <column name="nome" length="100" />
+        </property>
+        <property name="endereco" type="string">
+            <column name="endereco" length="100" />
+        </property>
+        <property name="cidade" type="string">
+            <column name="cidade" length="100" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="2" />
+        </property>
+        <property name="telefone" type="string">
+            <column name="telefone" length="13" />
+        </property>
+        <property name="bairro" type="string">
+            <column name="bairro" length="100" />
+        </property>
+        <property name="tipopessoa" type="java.lang.Character">
+            <column name="tipopessoa" length="1" />
+        </property>
+        <property name="datanascimento" type="date">
+            <column name="datanascimento" length="13" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" />
+        </property>
+        <property name="numeroresidencia" type="java.lang.Integer">
+            <column name="numeroresidencia" />
+        </property>
+        <property name="cep" type="string">
+            <column name="cep" length="12" />
+        </property>
+        <property name="cpf" type="string">
+            <column name="cpf" length="14" />
+        </property>
+        <property name="sexo" type="java.lang.Character">
+            <column name="sexo" length="1" />
+        </property>
+        <property name="senha" type="string">
+            <column name="senha" length="8" />
+        </property>
+        <property name="apelido" type="string">
+            <column name="apelido" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

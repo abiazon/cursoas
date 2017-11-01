@@ -51,8 +51,11 @@
                     </p:selectOneMenu>
                     <p:message for="comboCidade" />
                     <h:outputText value="Telefone" />
-                    <p:inputMask id="telefone" value="#{cntrPessoa.telefone}" mask="(99)99999-9999" size="15" required="true" requiredMessage="Telefone Obrigatório"/>
+                    <p:inputMask id="telefone" value="#{cntrPessoa.telefone}" mask="(99)9999-9999" size="14" required="true" requiredMessage="Telefone Obrigatório"/>
                     <p:message for="telefone"/>
+                    <h:outputText value="Celular" />
+                    <p:inputMask id="celular" value="#{cntrPessoa.celular}" mask="(99)99999-9999" size="15" required="true" requiredMessage="Celular Obrigatório"/>
+                    <p:message for="celular"/>
                     <h:outputText value="Bairro" />
                     <p:inputText id="bairro" value="#{cntrPessoa.bairro}" size="40" required="true" requiredMessage="Bairro Obrigatório"/>
                     <p:message for="bairro"/>
@@ -140,6 +143,9 @@
                     </p:selectOneMenu>                       
                     <h:outputText value="Telefone" />
                     <h:inputText value="#{cntrPessoa.pessoa.telefone}" style="font-weight:bold"/>
+                    <h:outputText value="Celular" />
+                    <h:inputText id="celular" value="#{cntrPessoa.pessoa.celular}" style="font-weight:bold"/>
+                    <p:message for="celular"/>
                     <h:outputText value="Bairro" />
                     <h:inputText value="#{cntrPessoa.pessoa.bairro}" style="font-weight:bold"/>
                     <h:outputText value="Data Nasc" />

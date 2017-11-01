@@ -30,11 +30,20 @@ public class Pessoa  implements java.io.Serializable {
      private Character sexo;
      private String senha;
      private String apelido;
+     private String celular;
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
 
     public Pessoa() {
     }
     
-    public Pessoa(String nome, String endereco, String cidade, String estado, String telefone, String bairro, Date datanascimento, String email, Integer numeroresidencia, String cep, String cpf, Character sexo, String apelido) {
+    public Pessoa(String nome, String endereco, String cidade, String estado, String telefone, String bairro, Date datanascimento, String email, Integer numeroresidencia, String cep, String cpf, Character sexo, String apelido, String celular) {
         this.nome = nome;
         this.endereco = endereco;
         this.cidade = cidade;
@@ -48,6 +57,7 @@ public class Pessoa  implements java.io.Serializable {
         this.cpf = cpf;
         this.sexo = sexo;
         this.apelido = apelido;
+        this.celular = celular;
     }
 	
     public Pessoa(int id) {

@@ -125,13 +125,31 @@ public class PessoaDAO {
         return estado;
     }
 
-    public List<Pessoa> getPessoaapelido(String apelidopessoa) {
+    public List<Pessoa> getPessoacpf(String cpf) {
+        List listacpf=null;
+        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        try{
+            String queryString = "from Pessoa where cpf = :cpfToFind";
+            Query query = session.createQuery(queryString);
+            query.setString("cpfToFind", cpf);
+            listacpf = query.list(); 
+            return listacpf;    
+        }catch (RuntimeException e){
+            e.printStackTrace();
+        }finally{
+            session.flush();
+            session.close();
+        }   
+        return listacpf;
+    }
+    
+    public List<Pessoa> getPessoaapelido(String apelido) {
         List listaapelido=null;
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         try{
-            String queryString = "from Pessoa where apelido = :apelidoToFind";
+            String queryString = "from Pessoa where cpf = :apelidoToFind";
             Query query = session.createQuery(queryString);
-            query.setString("apelidoToFind", apelidopessoa);
+            query.setString("apelidoToFind", apelido);
             listaapelido = query.list(); 
             return listaapelido;    
         }catch (RuntimeException e){

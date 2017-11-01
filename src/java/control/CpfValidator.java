@@ -5,6 +5,8 @@
  */
 package control;
 
+import dao.PessoaDAO;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -16,6 +18,8 @@ import javax.faces.validator.ValidatorException;
 public class CpfValidator implements Validator {
 
     private final FacesMessage msg;
+    private PessoaDAO dao;
+     private List listacpf;
 
     public CpfValidator() {
         msg = new FacesMessage("Validacao CPF falhou", "CPF Inválido");
@@ -41,6 +45,11 @@ public class CpfValidator implements Validator {
             if (!cpfGerado.equals(cpf)) {
                 throw new ValidatorException(msg);
             }
+            dao = new PessoaDAO();
+            listacpf = dao.getPessoacpf(cpf);
+            if (listacpf.size()>0) {
+                throw new ValidatorException(msg);
+            }            
 
         }
 

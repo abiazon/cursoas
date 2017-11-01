@@ -41,15 +41,6 @@ public class CntrPessoa {
     private String apelido;
     private Pessoa pessoa;
     private String nomeestado;
-    private String celular;
-
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
 
     public String getNomeestado() {
         return nomeestado;
@@ -176,7 +167,7 @@ public class CntrPessoa {
     }
 
     public void addpessoa() {
-        pessoa = new Pessoa(getNome(), getEndereco(),getCidade(), getEstado(), getTelefone(), getBairro(), getDatanascimento(), getEmail(), getNumeroresidencia(), getCep(), getCpf(), getSexo(), getApelido(),getCelular() );
+        pessoa = new Pessoa(getNome(), getEndereco(),getCidade(), getEstado(), getTelefone(), getBairro(), getDatanascimento(), getEmail(), getNumeroresidencia(), getCep(), getCpf(), getSexo(), getApelido() );
         pessoa.setTipopessoa('1');      
         dao = new PessoaDAO();
         dao.addPessoa(pessoa);

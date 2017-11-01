@@ -53,8 +53,5 @@
         <property name="apelido" type="string">
             <column name="apelido" length="50" />
         </property>
-        <property name="celular" type="string">
-            <column name="celular" length="14" />
-        </property>
     </class>
 </hibernate-mapping>

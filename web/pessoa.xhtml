@@ -65,7 +65,7 @@
                     </p:inputText>
                     <p:message for="email" />
                     <h:outputText value="CPF" />
-                    <p:inputMask id="cpf" value="#{cntrPessoa.cpf}" mask="999.999.999-99" size="14" converter="cpfConverter" required="true" requiredMessage="CPF Obrigatório">
+                    <p:inputMask id="cpf" value="#{cntrPessoa.cpf}" mask="999.999.999-99" size="14" required="true" requiredMessage="CPF Obrigatório">
                         <f:validator validatorId="cpfValidator"/>
                     </p:inputMask> 
                     <p:message for="cpf" /> 

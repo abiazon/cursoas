@@ -40,6 +40,16 @@ public class CntrPessoa {
     private String senha;
     private String apelido;
     private Pessoa pessoa;
+    private String nomeestado;
+
+    public String getNomeestado() {
+        return nomeestado;
+    }
+
+    public void setNomeestado(String nomeestado) {
+        this.nomeestado = nomeestado;
+    }
+
     private PessoaDAO dao;
     private DataModel<Pessoa> listaPessoa;
     List<Pessoa> lista;
@@ -51,18 +61,14 @@ public class CntrPessoa {
         listestados = new PessoaDAO().listEstado();
     }
     
-    public void register() {
-        // Just for debug. Don't do this in real! Hash the password, save to DB and forget it ;)
-        System.out.println("Username: " + nome);
-        System.out.println("Password: " + apelido);
-
-        // Show succes message.
-        FacesContext.getCurrentInstance().addMessage("register", new FacesMessage("Succes!"));
-    }
-        
     public void comboEstadoChange() {
         listacidade = new PessoaDAO().listCidade(getEstado());
     }
+    
+    public void comboEstadoChangeDialog() {
+        pessoa.setCidade("");
+        listacidade = new PessoaDAO().listCidade(pessoa.getEstado());
+    }    
     
     public void setListacidade(List<Cidade> listacidade) {
         this.listacidade = listacidade;
@@ -74,6 +80,7 @@ public class CntrPessoa {
     public void setListestados(List<Estado> listestados) {
         this.listestados = listestados;
     }
+    
     public List<Estado> getListestados() {
         return listestados;
     }
@@ -144,12 +151,19 @@ public class CntrPessoa {
 
     public void prepararalterarPessoa() {
         pessoa = (Pessoa) (listaPessoa.getRowData());
-        System.out.println(pessoa.getNome()+" "+pessoa.getEmail());
+        dao = new PessoaDAO();
+        listacidade = new PessoaDAO().listCidade(pessoa.getEstado());
+        nomeestado = dao.pegaestado(pessoa.getEstado()).getnomeestado();
+        System.out.println("pessoa posicionada:"+pessoa.getNome()+" "+pessoa.getEmail()+pessoa.getEstado()+" "+nomeestado);
     }
 
     public void alterarPessoa() {
         dao = new PessoaDAO();
         dao.update(pessoa);
+        System.out.println("Salvando-->"+getEstado()+" "+getCidade());
+        //estado="";
+        //Estado estado = new Estado();
+        //estado.setIdunidFed(pessoa.getEstado());
     }
 
     public void addpessoa() {
@@ -157,8 +171,6 @@ public class CntrPessoa {
         pessoa.setTipopessoa('1');      
         dao = new PessoaDAO();
         dao.addPessoa(pessoa);
-        pessoa = new Pessoa();
-        dao = new PessoaDAO();
     }
     
     public String verificaCpfExistente(){

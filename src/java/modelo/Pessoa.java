@@ -33,7 +33,8 @@ public class Pessoa  implements java.io.Serializable {
 
     public Pessoa() {
     }
-public Pessoa(String nome, String endereco, String cidade, String estado, String telefone, String bairro, Date datanascimento, String email, Integer numeroresidencia, String cep, String cpf, Character sexo, String apelido) {
+    
+    public Pessoa(String nome, String endereco, String cidade, String estado, String telefone, String bairro, Date datanascimento, String email, Integer numeroresidencia, String cep, String cpf, Character sexo, String apelido) {
         this.nome = nome;
         this.endereco = endereco;
         this.cidade = cidade;

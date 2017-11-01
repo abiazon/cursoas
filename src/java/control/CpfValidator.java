@@ -18,14 +18,13 @@ public class CpfValidator implements Validator {
     private final FacesMessage msg;
 
     public CpfValidator() {
-        msg = new FacesMessage("Validacao CPF falhou", "CPF inválido");
+        msg = new FacesMessage("Validacao CPF falhou", "CPF Inválido");
         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
     }
 
     @Override
     public void validate(FacesContext facesContext, UIComponent componente, Object valor) throws ValidatorException {
         String cpf = (String) valor;
-        System.out.println("estou no validadecpf");
         if (cpf == null) {
             throw new ValidatorException(msg);
 
@@ -33,10 +32,6 @@ public class CpfValidator implements Validator {
             if (verificarSeDigIguais(cpf)) {
                 throw new ValidatorException(msg);
             }
-//            if (cpf.length() != 11) {
-//                throw new ValidatorException(msg);
-//            }
-
             String cpfGerado = "";
 
             cpfGerado = cpf.substring(0, 9);

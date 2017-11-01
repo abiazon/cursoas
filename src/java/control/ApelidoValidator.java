@@ -6,6 +6,7 @@
 package control;
 
 import dao.PessoaDAO;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -21,6 +22,7 @@ import javax.faces.validator.ValidatorException;
 public class ApelidoValidator implements Validator{
      private final FacesMessage msg;
      private PessoaDAO dao;
+     private List listaapelido;
 
     public ApelidoValidator() {
         msg = new FacesMessage("Erro", "Apelido já Utilizado");
@@ -30,12 +32,12 @@ public class ApelidoValidator implements Validator{
     @Override
     public void validate(FacesContext facesContext, UIComponent componente, Object valor) throws ValidatorException {
         String apelido = (String) valor;
-        System.out.println("estou no validaapelido");
         if (apelido == null) {
             throw new ValidatorException(msg);
         } else {
             dao = new PessoaDAO();
-            if (dao.getPessoaapelido(apelido)!= null) {
+            listaapelido = dao.getPessoaapelido(apelido);
+            if (listaapelido.size()>0) {
                 throw new ValidatorException(msg);
             }
         }

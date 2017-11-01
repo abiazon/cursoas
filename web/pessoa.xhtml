@@ -13,14 +13,14 @@
     <h:body>
         <h:form id="formulario">
             <p:panel header="Incluir Pessoas">
-                <h:panelGrid columns="3" id="grid" width="70%" columnClasses="texto,form,messages">
+                <h:panelGrid columns="3" id="grid" width="100%" columnClasses="texto,form,messages">
                     <h:outputText value="Nome " />
-                    <p:inputText id="nome" value="#{cntrPessoa.nome}" size="80" required="true" requiredMessage="Nome Obrigatório"/>
+                    <p:inputText id="nome" value="#{cntrPessoa.nome}" size="50" required="true" requiredMessage="Nome Obrigatório"/>
                     <p:message for="nome"/>
                     <h:outputText value="Endereço" />
-                    <p:inputText id="endereco" value="#{cntrPessoa.endereco}" size="80" required="true" requiredMessage="Endereço ObrigatÃ³rio"/>
+                    <p:inputText id="endereco" value="#{cntrPessoa.endereco}" size="50" required="true" requiredMessage="Endereço Obrigatório"/>
                     <p:message for="endereco"/>
-                    <h:outputText value="Número da Residência" />
+                    <h:outputText value="Número" />
                     <p:inputNumber id="numeroResidencia" converter="javax.faces.Integer" decimalPlaces="0" value="#{cntrPessoa.numeroresidencia}" size="4" maxlength="5" required="true" requiredMessage="Número Obrigatório">
                     </p:inputNumber>
                     <p:message for="numeroResidencia"/>
@@ -28,7 +28,7 @@
                     <p:inputMask id="cep" value="#{cntrPessoa.cep}" size="10" mask="99.999-999" required="true" requiredMessage="CEP Obrigatório"/>
                     <p:message for="cep"/>
                     <h:outputText value="Estado" /> 
-                    <h:selectOneMenu id="comboEstados" value="#{cntrPessoa.estado}">  
+                    <p:selectOneMenu id="comboEstados" value="#{cntrPessoa.estado}">  
                         <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" />
                         <f:selectItems value="#{cntrPessoa.listestados}" var="estados" itemLabel="#{estados.nomeestado}" itemValue="#{estados.idunidFed}" />
 <!--                        <f:selectItem itemLabel="PR - Paraná" itemValue="PR" />
@@ -42,33 +42,33 @@
                             event="change"  
                             update="comboCidade"  
                             process="comboEstados" />  
-                    </h:selectOneMenu>
+                    </p:selectOneMenu>
                     <p:message for="comboEstados" />
                     <h:outputText value="Cidade" />
-                    <h:selectOneMenu id="comboCidade" value="#{cntrPessoa.cidade}">  
+                    <p:selectOneMenu id="comboCidade" value="#{cntrPessoa.cidade}">  
                         <f:selectItem itemLabel="Selecione" itemValue="0" />  
                         <f:selectItems value="#{cntrPessoa.listacidade}" var="cidades" itemLabel="#{cidades.nomedesc}" itemValue="#{cidades.nomedesc}" />
-                    </h:selectOneMenu>
+                    </p:selectOneMenu>
                     <p:message for="comboCidade" />
                     <h:outputText value="Telefone" />
                     <p:inputMask id="telefone" value="#{cntrPessoa.telefone}" mask="(99)99999-9999" size="15" required="true" requiredMessage="Telefone Obrigatório"/>
                     <p:message for="telefone"/>
                     <h:outputText value="Bairro" />
-                    <p:inputText id="bairro" value="#{cntrPessoa.bairro}" size="50" required="true" requiredMessage="Bairro Obrigatório"/>
+                    <p:inputText id="bairro" value="#{cntrPessoa.bairro}" size="40" required="true" requiredMessage="Bairro Obrigatório"/>
                     <p:message for="bairro"/>
                     <h:outputText value="Data Nascimento" />
-                    <p:calendar id="dataNascimento" value="#{cntrPessoa.datanascimento}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Data Nascimento ObrigatÃ³rio"/>
+                    <p:calendar id="dataNascimento" value="#{cntrPessoa.datanascimento}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Data Nascimento Obrigatória"/>
                     <p:message for="dataNascimento"/>
                     <h:outputText value="Email" />
-                    <h:inputText id="email" value="#{cntrPessoa.email}" required="true" label="Email" validatorMessage="E-mail incorreto">
+                    <p:inputText id="email" value="#{cntrPessoa.email}" size="40" required="true" label="Email" requiredMessage="E-mail Obrigatório">
                         <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
-                    </h:inputText>
+                    </p:inputText>
                     <p:message for="email" />
                     <h:outputText value="CPF" />
-                    <p:inputMask id="cpf" value="#{cntrPessoa.cpf}" mask="999.999.999-99" converter="cpfConverter" required="true">
+                    <p:inputMask id="cpf" value="#{cntrPessoa.cpf}" mask="999.999.999-99" size="14" converter="cpfConverter" required="true" requiredMessage="CPF Obrigatório">
                         <f:validator validatorId="cpfValidator"/>
                     </p:inputMask> 
-                    <h:message for="cpf" /> 
+                    <p:message for="cpf" /> 
                     <p:outputLabel id="sexo" for="sexo" value="Sexo:" />
                     <p:selectOneRadio id="console" value="#{cntrPessoa.sexo}" >
                         <f:selectItem itemLabel="M" itemValue="M" />
@@ -76,7 +76,7 @@
                     </p:selectOneRadio>
                     <p:message for="sexo"/> 
                     <h:outputText value="Apelido" />
-                    <p:inputText id="apelido" value="#{cntrPessoa.apelido}" size="50" required="true" requiredMessage="Apelido Obrigattório">
+                    <p:inputText id="apelido" value="#{cntrPessoa.apelido}" size="20" required="true" requiredMessage="Apelido Obrigatório">
                         <f:validator validatorId="apelidoValidator"/>
                     </p:inputText>
                     <p:message for="apelido"/>
@@ -87,7 +87,7 @@
         </h:form>
         
         <h:form id="formtable">
-            <p:dataTable style="width:80%" id="tabelaPessoa" value="#{cntrPessoa.listarPessoa}" emptyMessage="NÃ£o hÃ¡ registros" var="pes" paginator="true" rows="10">
+            <p:dataTable style="width:100%" id="tabelaPessoa" value="#{cntrPessoa.listarPessoa}" emptyMessage="Não há Registros" var="pes" paginator="true" rows="10">
                 <f:facet name="header">
                     Lista de Pessoas Cadastrados
                 </f:facet>
@@ -114,18 +114,30 @@
                 </f:facet>
             </p:dataTable> 
         </h:form>
-
-        <p:dialog header="Detalhes do Participante" widgetVar="pessoaDialog" id="pessoaDlg" resizable="true" modal="true">
-            <h:form id="formdialog">
+        
+        <h:form id="formdialog">
+            <p:dialog header="Detalhes do Participante" widgetVar="pessoaDialog" id="pessoaDlg" resizable="true" modal="true">
                 <h:panelGrid id="display" columns="2" >
                     <h:outputText value="Nome" />
                     <h:inputText value="#{cntrPessoa.pessoa.nome}" style="font-weight:bold"/>
-                    <h:outputText value="EndereÃ§o" />
+                    <h:outputText value="Endereço" />
                     <h:inputText value="#{cntrPessoa.pessoa.endereco}" style="font-weight:bold"/>
-                    <h:outputText value="Cidade" />
-                    <h:inputText value="#{cntrPessoa.pessoa.cidade}" style="font-weight:bold"/>
                     <h:outputText value="Estado" />
-                    <h:inputText value="#{cntrPessoa.pessoa.estado}" style="font-weight:bold"/>
+                    <p:selectOneMenu id="comboEstadosDialog" value="#{cntrPessoa.pessoa.estado}" >  
+                       <f:selectItems itemLabel="#{cntrPessoa.nomeestado}" itemValue=""  />
+                       <f:selectItems value="#{cntrPessoa.listestados}"  var="estado" itemLabel="#{estado.nomeestado}" itemValue="#{estado.idunidFed}" />                    
+                        <p:ajax 
+                            listener="#{cntrPessoa.comboEstadoChangeDialog()}"
+                            event="change"  
+                            update="comboCidadeDialog"  
+                            process="comboEstadosDialog" 
+                        />  
+                    </p:selectOneMenu>
+                    <h:outputText value="Cidade" />
+                    <p:selectOneMenu id="comboCidadeDialog" value="#{cntrPessoa.pessoa.cidade}" required="true" requiredMessage="Estado Obrigatório">  
+                        <f:selectItems itemLabel="#{cntrPessoa.pessoa.cidade}" itemValue="" />  
+                        <f:selectItems value="#{cntrPessoa.listacidade}" var="cidades" itemLabel="#{cidades.nomedesc}" itemValue="#{cidades.nomedesc}" />
+                    </p:selectOneMenu>                       
                     <h:outputText value="Telefone" />
                     <h:inputText value="#{cntrPessoa.pessoa.telefone}" style="font-weight:bold"/>
                     <h:outputText value="Bairro" />
@@ -139,8 +151,8 @@
                     <h:inputText value="#{cntrPessoa.pessoa.numeroresidencia}" style="font-weight:bold"/> 
                     <p:commandButton onclick="pessoaDialog.hide()" value="Alterar" icon="ui-icon-check" actionListener="#{cntrPessoa.alterarPessoa()}" update=":formtable:tabelaPessoa" /> 
                 </h:panelGrid>
-            </h:form>
-        </p:dialog>
+            </p:dialog>
+        </h:form>
     </h:body>
 
 </html>

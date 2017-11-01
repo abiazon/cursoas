@@ -6,7 +6,6 @@
 package control;
 
 import dao.CursoDAO;
-import java.awt.event.ActionEvent;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;

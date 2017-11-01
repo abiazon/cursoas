@@ -21,7 +21,7 @@
             <column name="estado" length="2" />
         </property>
         <property name="telefone" type="string">
-            <column name="telefone" length="13" />
+            <column name="telefone" length="14" />
         </property>
         <property name="bairro" type="string">
             <column name="bairro" length="100" />

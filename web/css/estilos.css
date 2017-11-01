@@ -9,13 +9,13 @@ and open the template in the editor.
 */
 
 .texto{
-    width: 50%;
+    width: 15;
 }
 .form{
-    width: 50%;
+    width: 55%;
 }
 .messages{
-    width: 35%;
+    width: 30%;
 }
 .colunaEsquerda{
 	text-align: right;

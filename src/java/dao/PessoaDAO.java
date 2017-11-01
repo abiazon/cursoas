@@ -102,7 +102,7 @@ public class PessoaDAO {
         Pessoa pessoa = null;
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         try{
-            String queryString = "from pessoa where idpessoa = :idToFind";
+            String queryString = "from Pessoa where idpessoa = :idToFind";
             Query query = session.createQuery(queryString);
             query.setInteger("idToFind", idpessoa);
             pessoa = (Pessoa) query.uniqueResult();
@@ -114,21 +114,32 @@ public class PessoaDAO {
         }  
         return pessoa;
     }
+    
+    public Estado pegaestado(String ufestado){
+        Estado estado = null;
+        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        String queryString = "from Estado where idunidFed = :idToFind ";
+        Query query = session.createQuery(queryString);
+        query.setString("idToFind", ufestado);
+        estado = (Estado) query.uniqueResult();
+        return estado;
+    }
 
-    public Pessoa getPessoaapelido(String apelidopessoa) {
-        Pessoa pessoa = null;
+    public List<Pessoa> getPessoaapelido(String apelidopessoa) {
+        List listaapelido=null;
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         try{
-            String queryString = "from pessoa where apelido = :apelidoToFind";
+            String queryString = "from Pessoa where apelido = :apelidoToFind";
             Query query = session.createQuery(queryString);
             query.setString("apelidoToFind", apelidopessoa);
-            pessoa = (Pessoa) query.uniqueResult();
+            listaapelido = query.list(); 
+            return listaapelido;    
         }catch (RuntimeException e){
             e.printStackTrace();
         }finally{
             session.flush();
             session.close();
-        }  
-        return pessoa;
+        }   
+        return listaapelido;
     }
 }

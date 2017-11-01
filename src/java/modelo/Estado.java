@@ -8,17 +8,16 @@ package modelo;
  */
 public class Estado  implements java.io.Serializable {
 
-
-     private String idunidFed;
-     private String nomeestado;
+    private String idunidFed;
+    private String nomeestado;
 
     public Estado() {
     }
 
-	
     public Estado(String idunidFed) {
         this.idunidFed = idunidFed;
     }
+    
     public Estado(String idunidFed, String nomeEstado) {
        this.idunidFed = idunidFed;
        this.nomeestado = nomeEstado;
@@ -31,6 +30,7 @@ public class Estado  implements java.io.Serializable {
     public void setIdunidFed(String idunidFed) {
         this.idunidFed = idunidFed;
     }
+    
     public String getnomeestado() {
         return this.nomeestado;
     }
@@ -38,10 +38,6 @@ public class Estado  implements java.io.Serializable {
     public void setnomeestado(String nomeestado) {
         this.nomeestado = nomeestado;
     }
-
-
-
-
 }
 
 

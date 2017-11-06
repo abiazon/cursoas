@@ -13,18 +13,18 @@
     <h:body>
         <h:form id="formulario">
             <p:panel header="Incluir Cursos">
-                <h:panelGrid columns="3" id="grid" width="100%" columnClasses="texto,form,messages">
+                <h:panelGrid columns="3" id="grid" width="100%" border="1" styleClass="comBordaSimples" columnClasses="texto,form,messages">
                     <h:outputText value="Nome Curso" />
-                    <p:inputText id="nome" value="#{cntrCurso.nome}" size="50" required="true" requiredMessage="Nome Obrigatório"/>
+                    <p:inputText id="nome" value="#{cntrCurso.curso.nome}" size="50" required="true" requiredMessage="Nome Obrigatório"/>
                     <p:message for="nome"/>
                     <h:outputText value="Data Inicio"/>
-                    <p:calendar id="dti" value="#{cntrCurso.datainicio}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Data Inicio Obrigatória"/>
+                    <p:calendar id="dti" value="#{cntrCurso.curso.datainicio}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Data Inicio Obrigatória"/>
                     <p:message for="dti" />
                     <h:outputText value="Data Final"/>
-                    <p:calendar id="dtf" value="#{cntrCurso.datafim}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Data Fim Obrigatória"/>
+                    <p:calendar id="dtf" value="#{cntrCurso.curso.datafim}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Data Fim Obrigatória"/>
                     <p:message for="dtf" />
                     <h:outputText value="Valor Curso"/>
-                    <p:inputNumber id="preco" converter="javax.faces.Double" value="#{cntrCurso.valorcurso}" size="10" required="true" requiredMessage="Valor Obrigatório"
+                    <p:inputNumber id="preco" converter="javax.faces.Double" value="#{cntrCurso.curso.valorcurso}" size="10" required="true" requiredMessage="Valor Obrigatório"
                                    symbol="R$ " decimalSeparator="," thousandSeparator="." style="text-align:center" />
                     <p:message for="preco" />
 
@@ -74,18 +74,20 @@
 
         <p:dialog header="Detalhes do Curso" widgetVar="cursoDialog" id="cursoDlg" resizable="true" modal="true">
             <h:form id="formdialog">
-                <h:panelGrid id="display" columns="2" >
+                <h:panelGrid id="display" columns="2" border="1">
                     <h:outputText value="Nome" />
-                    <h:inputText value="#{cntrCurso.curso.nome}" style="font-weight:bold"/>
+                    <p:inputText id="nomed" size="50" value="#{cntrCurso.curso.nome}" required="true" style="font-weight:bold"/>
                     <h:outputText value="Data Inicial" />
-                    <p:calendar value="#{cntrCurso.curso.datainicio}" style="font-weight:bold" pattern="dd/MM/yyyy">
+                    <p:calendar id="dtid" size="10" value="#{cntrCurso.curso.datainicio}" required="true" style="font-weight:bold" pattern="dd/MM/yyyy">
                     </p:calendar>
                     <h:outputText value="Data Final" />
-                    <p:calendar value="#{cntrCurso.curso.datafim}" style="font-weight:bold" pattern="dd/MM/yyyy">
+                    <p:calendar id="dtfd" size="10" value="#{cntrCurso.curso.datafim}" required="true" style="font-weight:bold" pattern="dd/MM/yyyy">
                     </p:calendar>
                     <h:outputText value="Preço" />
-                    <h:inputText value="#{cntrCurso.curso.valorcurso}" style="font-weight:bold"/>
-                    <p:commandButton onclick="cursoDialog.hide()" value="Alterar" icon="ui-icon-check" action="#{cntrCurso.alterarCurso}" update=":formtable:tabelaCurso" /> 
+                    <p:inputNumber id="precod" converter="javax.faces.Double" size="8" value="#{cntrCurso.curso.valorcurso}" required="true" style="font-weight:bold" 
+                      symbol="R$ " decimalSeparator="," thousandSeparator="." />
+                    <p:commandButton oncomplete="if (args &amp;&amp; !args.validationFailed) PF('cursoDialog').hide();" value="Alterar" icon="ui-icon-check" action="#{cntrCurso.alterarCurso}" update=":formtable:tabelaCurso" />  
+                    <p:commandButton value="Cancelar" onclick="PF('cursoDialog').hide();"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>

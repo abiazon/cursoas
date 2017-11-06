@@ -17,21 +17,24 @@ import javax.faces.validator.ValidatorException;
 @FacesValidator("cpfValidator")
 public class CpfValidator implements Validator {
 
-    private final FacesMessage msg;
+    private final FacesMessage msg,msga;
     private PessoaDAO dao;
      private List listacpf;
 
     public CpfValidator() {
         msg = new FacesMessage("Validacao CPF falhou", "CPF Inválido");
+        msga = new FacesMessage("Validacao CPF falhou", "CPF Já Cadastrado");
         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+        msga.setSeverity(FacesMessage.SEVERITY_ERROR);
     }
 
     @Override
     public void validate(FacesContext facesContext, UIComponent componente, Object valor) throws ValidatorException {
         String cpf = (String) valor;
+//        cpf = cpf.replaceAll("\\.|-", "");
+        
         if (cpf == null) {
             throw new ValidatorException(msg);
-
         } else {
             if (verificarSeDigIguais(cpf)) {
                 throw new ValidatorException(msg);
@@ -48,11 +51,10 @@ public class CpfValidator implements Validator {
             dao = new PessoaDAO();
             listacpf = dao.getPessoacpf(cpf);
             if (listacpf.size()>0) {
-                throw new ValidatorException(msg);
+                throw new ValidatorException(msga);
             }            
-
+            System.out.println("getasvalidatorcpf");
         }
-
     }
     
     private String calculoComCpf(String cpf) {

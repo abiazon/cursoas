@@ -51,7 +51,10 @@
             <column name="senha" length="8" />
         </property>
         <property name="apelido" type="string">
-            <column name="apelido" length="50" />
+            <column name="apelido" length="20" />
         </property>
+        <property name="celular" type="string">
+            <column name="celular" length="14" />
+        </property>        
     </class>
 </hibernate-mapping>

@@ -46,7 +46,6 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/cursosas</property>
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">prodasadb</property>
-    <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping resource="modelo/Curso.hbm.xml"/>
     <mapping resource="modelo/Cursopalestrante.hbm.xml"/>
     <mapping resource="modelo/Pessoa.hbm.xml"/>

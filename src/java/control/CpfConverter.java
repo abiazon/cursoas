@@ -12,7 +12,6 @@ import javax.faces.convert.FacesConverter;
 
 @FacesConverter("cpfConverter")
 public class CpfConverter implements Converter {
-   
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String valor) {
             String semPontuacao = valor.replaceAll("\\.|-", ""); //removendo pontos e traços
@@ -23,8 +22,6 @@ public class CpfConverter implements Converter {
         public String getAsString(FacesContext facesContext, UIComponent component, Object objeto) {
             String cpf = (String) objeto;
             cpf = cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "." + cpf.substring(6, 9) + "-" + cpf.substring(9, 11);
-            System.out.println("getstring"+cpf);  
             return cpf;
         }
-   
 }

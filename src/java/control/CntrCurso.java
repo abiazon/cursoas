@@ -21,25 +21,26 @@ import modelo.Curso;
  * @author bruno
  */
 public class CntrCurso {
-    private int id,qtdcursos;
-    private String nome;
-    private Date datainicio, datafim;
-    private Double valorcurso; 
+    private int qtdcursos;
+    //private String nome;
+    //private Date datainicio, datafim;
+    //private Double valorcurso; 
     private DataModel<Curso> listarCurso;
     private Curso curso;
     private CursoDAO dao;
     List<Curso> lista;
 
     public CntrCurso() {
+        curso = new Curso();
 //        valorcurso = 0d;
     }
 
     public CntrCurso(int id, String nome, Date datainicio, Double valorcurso, Date datafim) {
-        this.id = id;
-        this.nome = nome;
-        this.datainicio = datainicio;
-        this.valorcurso = valorcurso;
-        this.datafim = datafim;
+//        this.id = id;
+//        this.nome = nome;
+//        this.datainicio = datainicio;
+//        this.valorcurso = valorcurso;
+//        this.datafim = datafim;
     }
 
     public DataModel getListarCurso() {
@@ -81,56 +82,57 @@ public class CntrCurso {
         dao.update(curso);
     }
     
-    public void addarraycurso() {
-    }
+  //  public void addarraycurso() {
+  //  }
 
     public void addcursco() {
-       curso = new Curso(getNome(), getDatainicio(), getValorcurso(), getDatafim());
+//       curso = new Curso(getNome(), getDatainicio(), getValorcurso(), getDatafim());
        dao = new CursoDAO();
        dao.addCurso(curso);
-       nome="";
-       datainicio=null;
-       datafim=null;
-       valorcurso=null;
+       curso = new Curso();
+       //nome="";
+       //datainicio=null;
+       //datafim=null;
+       //valorcurso=null;
     }
 
-    public int getId() {
-        return id;
-    }
+//    public int getId() {
+//        return id;
+//    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
-    public String getNome() {
-        return nome;
-    }
+    //public String getNome() {
+    //    return nome;
+    //}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    //public void setNome(String nome) {
+    //    this.nome = nome;
+    //}
 
-    public Date getDatainicio() {
-        return datainicio;
-    }
+    //public Date getDatainicio() {
+    //    return datainicio;
+    //}
 
-    public void setDatainicio(Date datainicio) {
-        this.datainicio = datainicio;
-    }
+    //public void setDatainicio(Date datainicio) {
+    //    this.datainicio = datainicio;
+    //}
 
-    public Double getValorcurso() {
-        return valorcurso;
-    }
+    //public Double getValorcurso() {
+    //    return valorcurso;
+    //}
 
-    public void setValorcurso(Double valorcurso) {
-        this.valorcurso = valorcurso;
-    }
+    //public void setValorcurso(Double valorcurso) {
+    //    this.valorcurso = valorcurso;
+    //}
 
-    public Date getDatafim() {
-        return datafim;
-    }
+    //public Date getDatafim() {
+    //    return datafim;
+    //}
 
-    public void setDatafim(Date datafim) {
-        this.datafim = datafim;
-    }
+    //public void setDatafim(Date datafim) {
+    //    this.datafim = datafim;
+    //}
 }

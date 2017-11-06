@@ -5,6 +5,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
+<!--    xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">-->
 
     <h:head>
         <title>Controle de Pessoas</title>
@@ -13,22 +15,22 @@
     <h:body>
         <h:form id="formulario">
             <p:panel header="Incluir Pessoas">
-                <h:panelGrid columns="3" id="grid" width="100%" columnClasses="texto,form,messages">
+                <h:panelGrid columns="3" id="grid" width="100%" border="1" styleClass="comBordaSimples" columnClasses="texto,form,messages">
                     <h:outputText value="Nome " />
-                    <p:inputText id="nome" value="#{cntrPessoa.nome}" size="50" required="true" requiredMessage="Nome Obrigatório"/>
+                    <p:inputText id="nome" value="#{cntrPessoa.pessoa.nome}" size="50" required="true" requiredMessage="Nome Obrigatório"/>
                     <p:message for="nome"/>
                     <h:outputText value="Endereço" />
-                    <p:inputText id="endereco" value="#{cntrPessoa.endereco}" size="50" required="true" requiredMessage="Endereço Obrigatório"/>
+                    <p:inputText id="endereco" value="#{cntrPessoa.pessoa.endereco}" size="50" required="true" requiredMessage="Endereço Obrigatório"/>
                     <p:message for="endereco"/>
                     <h:outputText value="Número" />
-                    <p:inputNumber id="numeroResidencia" converter="javax.faces.Integer" decimalPlaces="0" value="#{cntrPessoa.numeroresidencia}" size="4" maxlength="5" required="true" requiredMessage="Número Obrigatório">
+                    <p:inputNumber id="numeroResidencia" converter="javax.faces.Integer" decimalPlaces="0" value="#{cntrPessoa.pessoa.numeroresidencia}" size="4" maxlength="5" required="true" requiredMessage="Número Obrigatório">
                     </p:inputNumber>
                     <p:message for="numeroResidencia"/>
                     <h:outputText value="CEP" />
-                    <p:inputMask id="cep" value="#{cntrPessoa.cep}" size="10" mask="99.999-999" required="true" requiredMessage="CEP Obrigatório"/>
+                    <p:inputMask id="cep" value="#{cntrPessoa.pessoa.cep}" size="10" mask="99.999-999" required="true" requiredMessage="CEP Obrigatório"/>
                     <p:message for="cep"/>
                     <h:outputText value="Estado" /> 
-                    <p:selectOneMenu id="comboEstados" value="#{cntrPessoa.estado}">  
+                    <p:selectOneMenu id="comboEstados" value="#{cntrPessoa.pessoa.estado}">  
                         <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" />
                         <f:selectItems value="#{cntrPessoa.listestados}" var="estados" itemLabel="#{estados.nomeestado}" itemValue="#{estados.idunidFed}" />
 <!--                        <f:selectItem itemLabel="PR - Paraná" itemValue="PR" />
@@ -45,62 +47,70 @@
                     </p:selectOneMenu>
                     <p:message for="comboEstados" />
                     <h:outputText value="Cidade" />
-                    <p:selectOneMenu id="comboCidade" value="#{cntrPessoa.cidade}">  
+                    <p:selectOneMenu id="comboCidade" value="#{cntrPessoa.pessoa.cidade}">  
                         <f:selectItem itemLabel="Selecione" itemValue="0" />  
                         <f:selectItems value="#{cntrPessoa.listacidade}" var="cidades" itemLabel="#{cidades.nomedesc}" itemValue="#{cidades.nomedesc}" />
                     </p:selectOneMenu>
                     <p:message for="comboCidade" />
                     <h:outputText value="Telefone" />
-                    <p:inputMask id="telefone" value="#{cntrPessoa.telefone}" mask="(99)99999-9999" size="15" required="true" requiredMessage="Telefone Obrigatório"/>
+                    <p:inputMask id="telefone" value="#{cntrPessoa.pessoa.telefone}" mask="(99)99999-9999" size="15" required="true" requiredMessage="Telefone Obrigatório"/>
                     <p:message for="telefone"/>
+                    <h:outputText value="Celular" />
+                    <p:inputMask id="celular" value="#{cntrPessoa.pessoa.celular}"  mask="(99)99999-9999" size="15" required="true" requiredMessage="Celular Obrigatório"/>
+                    <p:message for="celular"/>
                     <h:outputText value="Bairro" />
-                    <p:inputText id="bairro" value="#{cntrPessoa.bairro}" size="40" required="true" requiredMessage="Bairro Obrigatório"/>
+                    <p:inputText id="bairro" value="#{cntrPessoa.pessoa.bairro}" size="40" required="true" requiredMessage="Bairro Obrigatório"/>
                     <p:message for="bairro"/>
                     <h:outputText value="Data Nascimento" />
-                    <p:calendar id="dataNascimento" value="#{cntrPessoa.datanascimento}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Data Nascimento Obrigatória"/>
+                    <p:calendar id="dataNascimento" value="#{cntrPessoa.pessoa.datanascimento}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Data Nascimento Obrigatória"/>
                     <p:message for="dataNascimento"/>
                     <h:outputText value="Email" />
-                    <p:inputText id="email" value="#{cntrPessoa.email}" size="40" required="true" label="Email" requiredMessage="E-mail Obrigatório">
+                    <p:inputText id="email" value="#{cntrPessoa.pessoa.email}" size="40" required="true" label="Email" requiredMessage="E-mail Obrigatório">
                         <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
                     </p:inputText>
                     <p:message for="email" />
                     <h:outputText value="CPF" />
-                    <p:inputMask id="cpf" value="#{cntrPessoa.cpf}" mask="999.999.999-99" size="14" required="true" requiredMessage="CPF Obrigatório">
+                    <p:inputMask id="cpf" value="#{cntrPessoa.pessoa.cpf}" converter="cpfConverter" mask="999.999.999-99" size="14" required="true" requiredMessage="CPF Obrigatório">
                         <f:validator validatorId="cpfValidator"/>
                     </p:inputMask> 
                     <p:message for="cpf" /> 
                     <p:outputLabel id="sexo" for="sexo" value="Sexo:" />
-                    <p:selectOneRadio id="console" value="#{cntrPessoa.sexo}" >
-                        <f:selectItem itemLabel="M" itemValue="M" />
-                        <f:selectItem itemLabel="F" itemValue="F" />
+                    <p:selectOneRadio id="console" value="#{cntrPessoa.pessoa.sexo}">
+                        <f:selectItem itemLabel="Masculino" itemValue="M" />
+                        <f:selectItem itemLabel="Feminino" itemValue="F" />
                     </p:selectOneRadio>
                     <p:message for="sexo"/> 
                     <h:outputText value="Apelido" />
-                    <p:inputText id="apelido" value="#{cntrPessoa.apelido}" size="20" required="true" requiredMessage="Apelido Obrigatório">
+                    <p:inputText id="apelido" value="#{cntrPessoa.pessoa.apelido}" size="20" required="true" requiredMessage="Apelido Obrigatório">
                         <f:validator validatorId="apelidoValidator"/>
                     </p:inputText>
                     <p:message for="apelido"/>
-                    <p:commandButton value="Gravar" action="#{cntrPessoa.addpessoa()}" update=":formtable:tabelaPessoa,grid"/>
+                    <p:commandButton value="Gravar" action="#{cntrPessoa.addpessoa()}" update=":formtable:tabelaPessoa,grid">
+                    </p:commandButton>
                     <p:commandButton value="Limpar" type="reset"/>
                 </h:panelGrid>
             </p:panel>
         </h:form>
         
         <h:form id="formtable">
-            <p:dataTable style="width:100%" id="tabelaPessoa" value="#{cntrPessoa.listarPessoa}" emptyMessage="Não há Registros" var="pes" paginator="true" rows="10">
+            <p:dataTable style="width:100%" id="tabelaPessoa" value="#{cntrPessoa.listarPessoa}" emptyMessage="Não há Registros" var="pes" paginator="true" rows="10" rowsPerPageTemplate="10,25,35,50">>
                 <f:facet name="header">
                     Lista de Pessoas Cadastrados
                 </f:facet>
-                <p:column headerText="Nome"  filterMaxLength="20" sortBy="#{pes.nome}" filterBy="#{pes.nome}">
+                <p:column headerText="Nome" width="35%" filterMaxLength="40" sortBy="#{pes.nome}" filterBy="#{pes.nome}" filterStyle="max-width: 400px; min-width:400px;">
                     <h:outputText value="#{pes.nome}"/>
                 </p:column>
-                <p:column headerText="Email"  filterMaxLength="20" sortBy="#{pes.email}" filterBy="#{pes.email}">
+                <p:column headerText="Email" width="20%" filterMaxLength="20" sortBy="#{pes.email}" filterBy="#{pes.email}" filterStyle="max-width: 250px; min-width:250px;">
                     <h:outputText value="#{pes.email}"/>
                 </p:column>
-                <p:column headerText="Apelido"  filterMaxLength="20" sortBy="#{pes.apelido}" filterBy="#{pes.apelido}">
+                <p:column headerText="Apelido" filterMaxLength="20" sortBy="#{pes.apelido}" filterBy="#{pes.apelido}" filterStyle="max-width: 150px; min-width:150px;">
                     <h:outputText value="#{pes.apelido}"/>
                 </p:column>
-                <p:column>
+                <p:column headerText="CPF" filterMaxLength="15" sortBy="#{pes.cpf}" filterBy="#{pes.cpf}" filterStyle="max-width: 150px; min-width:150px;">
+                    <h:outputText value="#{pes.maskCpf}" id="cpf">
+                    </h:outputText>
+                </p:column>
+                <p:column width="8%">
                     <p:commandButton action="#{cntrPessoa.excluirPessoa()}" icon="ui-icon-closethick"  update="tabelaPessoa" />
  <!--                    <p:commandButton value="Alterar" action="#{cntrPessoa.prepararalterarPessoa()}" />  -->
                     <p:commandButton actionListener="#{cntrPessoa.prepararalterarPessoa()}" icon="ui-icon-pencil" oncomplete="PF('pessoaDialog').show()" update=":formdialog:display" >
@@ -119,9 +129,14 @@
             <p:dialog header="Detalhes do Participante" widgetVar="pessoaDialog" id="pessoaDlg" resizable="true" modal="true">
                 <h:panelGrid id="display" columns="2" >
                     <h:outputText value="Nome" />
-                    <h:inputText value="#{cntrPessoa.pessoa.nome}" style="font-weight:bold"/>
+                    <p:inputText value="#{cntrPessoa.pessoa.nome}" required="true" style="font-weight:bold"/>
                     <h:outputText value="Endereço" />
-                    <h:inputText value="#{cntrPessoa.pessoa.endereco}" style="font-weight:bold"/>
+                    <p:inputText value="#{cntrPessoa.pessoa.endereco}" required="true" style="font-weight:bold"/>
+                    <h:outputText value="Número" />
+                    <p:inputNumber id="numeroResidencia" converter="javax.faces.Integer" decimalPlaces="0" value="#{cntrPessoa.pessoa.numeroresidencia}" size="4" maxlength="5" required="true">
+                    </p:inputNumber>
+                    <h:outputText value="CEP" />
+                    <p:inputMask id="cep" value="#{cntrPessoa.pessoa.cep}" size="10" mask="99.999-999" required="true"/>
                     <h:outputText value="Estado" />
                     <p:selectOneMenu id="comboEstadosDialog" value="#{cntrPessoa.pessoa.estado}" >  
                        <f:selectItems itemLabel="#{cntrPessoa.nomeestado}" itemValue=""  />
@@ -134,22 +149,36 @@
                         />  
                     </p:selectOneMenu>
                     <h:outputText value="Cidade" />
-                    <p:selectOneMenu id="comboCidadeDialog" value="#{cntrPessoa.pessoa.cidade}" required="true" requiredMessage="Estado Obrigatório">  
+                    <p:selectOneMenu id="comboCidadeDialog" value="#{cntrPessoa.pessoa.cidade}">  
                         <f:selectItems itemLabel="#{cntrPessoa.pessoa.cidade}" itemValue="" />  
                         <f:selectItems value="#{cntrPessoa.listacidade}" var="cidades" itemLabel="#{cidades.nomedesc}" itemValue="#{cidades.nomedesc}" />
                     </p:selectOneMenu>                       
                     <h:outputText value="Telefone" />
-                    <h:inputText value="#{cntrPessoa.pessoa.telefone}" style="font-weight:bold"/>
+                    <p:inputText value="#{cntrPessoa.pessoa.telefone}" style="font-weight:bold"/>
+                    <h:outputText value="Celular" />
+                    <p:inputMask id="celular" value="#{cntrPessoa.pessoa.celular}"  mask="(99)99999-9999" size="15" required="true"/>
                     <h:outputText value="Bairro" />
-                    <h:inputText value="#{cntrPessoa.pessoa.bairro}" style="font-weight:bold"/>
+                    <p:inputText value="#{cntrPessoa.pessoa.bairro}" style="font-weight:bold" required="true"/>
                     <h:outputText value="Data Nasc" />
                     <p:calendar value="#{cntrPessoa.pessoa.datanascimento}" style="font-weight:bold" pattern="dd/MM/yyyy">
                     </p:calendar>
                     <h:outputText value="E-mail" />
-                    <h:inputText value="#{cntrPessoa.pessoa.email}" style="font-weight:bold" />
-                    <h:outputText value="Número" />
-                    <h:inputText value="#{cntrPessoa.pessoa.numeroresidencia}" style="font-weight:bold"/> 
-                    <p:commandButton onclick="pessoaDialog.hide()" value="Alterar" icon="ui-icon-check" actionListener="#{cntrPessoa.alterarPessoa()}" update=":formtable:tabelaPessoa" /> 
+                    <p:inputText value="#{cntrPessoa.pessoa.email}" style="font-weight:bold" required="true"/>
+                    <h:outputText value="CPF" />
+                    <p:inputMask id="cpf" value="#{cntrPessoa.pessoa.cpf}" converter="cpfConverter" mask="999.999.999-99" size="14" required="true" >
+                        <f:validator validatorId="cpfValidator"/>
+                    </p:inputMask> 
+                    <p:outputLabel id="sexo" for="sexo" value="Sexo:" />
+                    <p:selectOneRadio id="console" value="#{cntrPessoa.pessoa.sexo}" >
+                        <f:selectItem itemLabel="Masculino" itemValue="M" />
+                        <f:selectItem itemLabel="Feminino" itemValue="F" />
+                    </p:selectOneRadio>
+                    <h:outputText value="Apelido" />
+                    <p:inputText id="apelido" value="#{cntrPessoa.pessoa.apelido}" size="20" required="true">
+                        <f:validator validatorId="apelidoValidator"/>
+                    </p:inputText>
+                    <p:commandButton oncomplete="if (args &amp;&amp; !args.validationFailed) PF('pessoaDialog').hide()" value="Alterar" icon="ui-icon-check" action="#{cntrPessoa.alterarPessoa()}" update=":formtable:tabelaPessoa" /> 
+                    <p:commandButton value="Cancelar" onclick="PF('pessoaDialog').hide();"/>
                 </h:panelGrid>
             </p:dialog>
         </h:form>

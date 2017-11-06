@@ -40,6 +40,7 @@ public class ApelidoValidator implements Validator{
             if (listaapelido.size()>0) {
                 throw new ValidatorException(msg);
             }
+            System.out.println("getasvalidatorapelido");
         }
     }  
 }

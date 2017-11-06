@@ -6,12 +6,15 @@
 package dao;
 
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import modelo.Cidade;
 import modelo.Estado;
 import modelo.Pessoa;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.primefaces.context.RequestContext;
 import util.NewHibernateUtil;
 
 /**
@@ -19,15 +22,21 @@ import util.NewHibernateUtil;
  * @author adriano
  */
 public class PessoaDAO {
+    
     public void addPessoa(Pessoa pessoa) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        RequestContext rc = RequestContext.getCurrentInstance();
+
         Transaction tx = null;
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         tx = session.beginTransaction();
         try {
             session.save(pessoa);
             session.getTransaction().commit();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro Salvo com sucesso.",""));
         } catch (Exception e) {
             e.printStackTrace();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Falha ao Salvar Registro.",e.getMessage()));  
             if (tx != null) {
                 tx.rollback();
             }
@@ -116,7 +125,7 @@ public class PessoaDAO {
     }
     
     public Estado pegaestado(String ufestado){
-        Estado estado = null;
+        Estado estado;
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         String queryString = "from Estado where idunidFed = :idToFind ";
         Query query = session.createQuery(queryString);
@@ -147,7 +156,7 @@ public class PessoaDAO {
         List listaapelido=null;
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         try{
-            String queryString = "from Pessoa where cpf = :apelidoToFind";
+            String queryString = "from Pessoa where apelido = :apelidoToFind";
             Query query = session.createQuery(queryString);
             query.setString("apelidoToFind", apelido);
             listaapelido = query.list(); 

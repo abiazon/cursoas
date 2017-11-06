@@ -129,14 +129,14 @@
             <p:dialog header="Detalhes do Participante" widgetVar="pessoaDialog" id="pessoaDlg" resizable="true" modal="true">
                 <h:panelGrid id="display" columns="2" >
                     <h:outputText value="Nome" />
-                    <p:inputText value="#{cntrPessoa.pessoa.nome}" required="true" style="font-weight:bold"/>
+                    <p:inputText value="#{cntrPessoa.pessoa.nome}" style="font-weight:bold"/>
                     <h:outputText value="Endereço" />
-                    <p:inputText value="#{cntrPessoa.pessoa.endereco}" required="true" style="font-weight:bold"/>
+                    <p:inputText value="#{cntrPessoa.pessoa.endereco}" style="font-weight:bold"/>
                     <h:outputText value="Número" />
-                    <p:inputNumber id="numeroResidencia" converter="javax.faces.Integer" decimalPlaces="0" value="#{cntrPessoa.pessoa.numeroresidencia}" size="4" maxlength="5" required="true">
+                    <p:inputNumber id="numeroResidencia" converter="javax.faces.Integer" decimalPlaces="0" value="#{cntrPessoa.pessoa.numeroresidencia}" size="4" maxlength="5" >
                     </p:inputNumber>
                     <h:outputText value="CEP" />
-                    <p:inputMask id="cep" value="#{cntrPessoa.pessoa.cep}" size="10" mask="99.999-999" required="true"/>
+                    <p:inputMask id="cep" value="#{cntrPessoa.pessoa.cep}" size="10" mask="99.999-999" />
                     <h:outputText value="Estado" />
                     <p:selectOneMenu id="comboEstadosDialog" value="#{cntrPessoa.pessoa.estado}" >  
                        <f:selectItems itemLabel="#{cntrPessoa.nomeestado}" itemValue=""  />
@@ -156,16 +156,16 @@
                     <h:outputText value="Telefone" />
                     <p:inputText value="#{cntrPessoa.pessoa.telefone}" style="font-weight:bold"/>
                     <h:outputText value="Celular" />
-                    <p:inputMask id="celular" value="#{cntrPessoa.pessoa.celular}"  mask="(99)99999-9999" size="15" required="true"/>
+                    <p:inputMask id="celular" value="#{cntrPessoa.pessoa.celular}"  mask="(99)99999-9999" size="15" />
                     <h:outputText value="Bairro" />
-                    <p:inputText value="#{cntrPessoa.pessoa.bairro}" style="font-weight:bold" required="true"/>
+                    <p:inputText value="#{cntrPessoa.pessoa.bairro}" style="font-weight:bold" />
                     <h:outputText value="Data Nasc" />
                     <p:calendar value="#{cntrPessoa.pessoa.datanascimento}" style="font-weight:bold" pattern="dd/MM/yyyy">
                     </p:calendar>
                     <h:outputText value="E-mail" />
-                    <p:inputText value="#{cntrPessoa.pessoa.email}" style="font-weight:bold" required="true"/>
+                    <p:inputText value="#{cntrPessoa.pessoa.email}" style="font-weight:bold" />
                     <h:outputText value="CPF" />
-                    <p:inputMask id="cpf" value="#{cntrPessoa.pessoa.cpf}" converter="cpfConverter" mask="999.999.999-99" size="14" required="true" >
+                    <p:inputMask id="cpf" value="#{cntrPessoa.pessoa.cpf}" converter="cpfConverter" mask="999.999.999-99" size="14" >
                         <f:validator validatorId="cpfValidator"/>
                     </p:inputMask> 
                     <p:outputLabel id="sexo" for="sexo" value="Sexo:" />
@@ -174,10 +174,10 @@
                         <f:selectItem itemLabel="Feminino" itemValue="F" />
                     </p:selectOneRadio>
                     <h:outputText value="Apelido" />
-                    <p:inputText id="apelido" value="#{cntrPessoa.pessoa.apelido}" size="20" required="true">
+                    <p:inputText id="apelido" value="#{cntrPessoa.pessoa.apelido}" size="20" >
                         <f:validator validatorId="apelidoValidator"/>
                     </p:inputText>
-                    <p:commandButton oncomplete="if (args &amp;&amp; !args.validationFailed) PF('pessoaDialog').hide()" value="Alterar" icon="ui-icon-check" action="#{cntrPessoa.alterarPessoa()}" update=":formtable:tabelaPessoa" /> 
+                    <p:commandButton value="Alterar" icon="ui-icon-check" action="#{cntrPessoa.alterarPessoa()}" update=":formtable:tabelaPessoa" /> 
                     <p:commandButton value="Cancelar" onclick="PF('pessoaDialog').hide();"/>
                 </h:panelGrid>
             </p:dialog>

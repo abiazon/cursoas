@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
+import modelo.Pessoa;
 
 /**
  *
@@ -22,7 +23,7 @@ import javax.faces.validator.ValidatorException;
 public class ApelidoValidator implements Validator{
      private final FacesMessage msg;
      private PessoaDAO dao;
-     private List listaapelido;
+     private static String cpfaq;
 
     public ApelidoValidator() {
         msg = new FacesMessage("Erro", "Apelido já Utilizado");
@@ -36,11 +37,12 @@ public class ApelidoValidator implements Validator{
             throw new ValidatorException(msg);
         } else {
             dao = new PessoaDAO();
-            listaapelido = dao.getPessoaapelido(apelido);
-            if (listaapelido.size()>0) {
-                throw new ValidatorException(msg);
-            }
-            System.out.println("getasvalidatorapelido");
+            Pessoa pessoa;
+            pessoa = dao.getPessoaapelido(apelido);
+            String cpf = pessoa.getCpf();
+          
+            cpfaq = CntrPessoa.getCpfcontrole();
+
         }
     }  
 }

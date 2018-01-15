@@ -144,6 +144,7 @@ public class Pessoa implements java.io.Serializable {
     public void setCep(String cep) {
         this.cep = cep;
     }
+    
     public String getCpf() {
         return this.cpf;
     }

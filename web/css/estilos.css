@@ -24,3 +24,12 @@ and open the template in the editor.
     border-collapse: collapse; /* CSS2 */
     background: #FFFFF0;
 }
+.imgpos {
+        position:absolute;
+        left:35%;
+        top:30%;
+
+}
+.link { 
+ text-decoration:none; 
+} 

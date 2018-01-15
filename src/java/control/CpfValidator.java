@@ -19,11 +19,11 @@ public class CpfValidator implements Validator {
 
     private final FacesMessage msg,msga;
     private PessoaDAO dao;
-     private List listacpf;
+    private List listacpf;
 
     public CpfValidator() {
-        msg = new FacesMessage("Validacao CPF falhou", "CPF Inválido");
-        msga = new FacesMessage("Validacao CPF falhou", "CPF Já Cadastrado");
+        msg = new FacesMessage("Validacao CPF falhou1", "CPF Inválido");
+        msga = new FacesMessage("Validacao CPF falhou2", "CPF Já Cadastrado");
         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
         msga.setSeverity(FacesMessage.SEVERITY_ERROR);
     }
@@ -32,7 +32,6 @@ public class CpfValidator implements Validator {
     public void validate(FacesContext facesContext, UIComponent componente, Object valor) throws ValidatorException {
         String cpf = (String) valor;
 //        cpf = cpf.replaceAll("\\.|-", "");
-        
         if (cpf == null) {
             throw new ValidatorException(msg);
         } else {
@@ -53,7 +52,6 @@ public class CpfValidator implements Validator {
             if (listacpf.size()>0) {
                 throw new ValidatorException(msga);
             }            
-            System.out.println("getasvalidatorcpf");
         }
     }
     

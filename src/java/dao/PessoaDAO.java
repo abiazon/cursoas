@@ -8,6 +8,7 @@ package dao;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.model.DataModel;
 import modelo.Cidade;
 import modelo.Estado;
 import modelo.Pessoa;
@@ -24,19 +25,13 @@ import util.NewHibernateUtil;
 public class PessoaDAO {
     
     public void addPessoa(Pessoa pessoa) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        RequestContext rc = RequestContext.getCurrentInstance();
-
-        Transaction tx = null;
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
-        tx = session.beginTransaction();
+        Transaction tx = session.beginTransaction();
         try {
             session.save(pessoa);
             session.getTransaction().commit();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro Salvo com sucesso.",""));
         } catch (Exception e) {
             e.printStackTrace();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Falha ao Salvar Registro.",e.getMessage()));  
             if (tx != null) {
                 tx.rollback();
             }
@@ -59,6 +54,15 @@ public class PessoaDAO {
         query.setString("idToFind", estado);
         List listacidade = query.list(); 
         return listacidade;
+    }
+    public List testausuario(Pessoa pessoa){
+        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        String queryString = "from Pessoa where apelido= :apelToFind and senha= :senhaToFind";
+        Query query = session.createQuery(queryString);
+        query.setString("apelToFind", pessoa.getApelido());
+        query.setString("senhaToFind", pessoa.getSenha());
+        List checalogin = query.list();
+        return checalogin;
     }
     
     public List<Estado> listEstado() {
@@ -85,12 +89,18 @@ public class PessoaDAO {
     }
     
     public void update(Pessoa pessoa) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        RequestContext rc = RequestContext.getCurrentInstance();
+
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         try {
             session.update(pessoa);
             session.getTransaction().commit();
+//            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Registro Salvo com sucesso.",""));
+            rc.execute("PF('pessoaDialog').hide();");
         } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Falha ao Salvar Registro.",e.getMessage()));  
             e.printStackTrace();
             if (tx != null) {
                 tx.rollback();
@@ -101,12 +111,6 @@ public class PessoaDAO {
         }
      }
    
-    public void deletePessoa(int idpessoa) {
-    }
-
-    public void updatePessoa(Pessoa pessoa) {
-    }
-
     public Pessoa getPessoaID(int idpessoa) {
         Pessoa pessoa = null;
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
@@ -153,14 +157,15 @@ public class PessoaDAO {
     }
     
     public List<Pessoa> getPessoaapelido(String apelido) {
-        List listaapelido=null;
+        //Pessoa pessoa=null;
+        List<Pessoa> listaapelido=null;
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         try{
             String queryString = "from Pessoa where apelido = :apelidoToFind";
             Query query = session.createQuery(queryString);
             query.setString("apelidoToFind", apelido);
+            //pessoa = (Pessoa) query.uniqueResult();
             listaapelido = query.list(); 
-            return listaapelido;    
         }catch (RuntimeException e){
             e.printStackTrace();
         }finally{
@@ -169,4 +174,22 @@ public class PessoaDAO {
         }   
         return listaapelido;
     }
+    
+    public List<Pessoa> getPessoaemail(String email) {
+        List<Pessoa> listaemail=null;
+        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        try{
+            String queryString = "from Pessoa where email = :emailToFind";
+            Query query = session.createQuery(queryString);
+            query.setString("emailToFind", email);
+            listaemail = query.list(); 
+        }catch (RuntimeException e){
+            e.printStackTrace();
+        }finally{
+            session.flush();
+            session.close();
+        }   
+        return listaemail;
+    }
+
 }

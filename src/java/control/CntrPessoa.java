@@ -6,15 +6,13 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
 import modelo.Cidade;
 import modelo.Estado;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
 import modelo.Pessoa;
-import org.primefaces.context.RequestContext;
+
 
 @ManagedBean
 @SessionScoped
@@ -24,8 +22,8 @@ import org.primefaces.context.RequestContext;
  */
 public class CntrPessoa {
     private int qtdpessoas;
-    private Pessoa pessoa;
-    private String nomeestado;
+    public Pessoa pessoa,pessoa1;
+    private String nomeestado,confirmasenha;
     private PessoaDAO dao;
     private DataModel<Pessoa> listaPessoa;
     List<Pessoa> lista;
@@ -34,7 +32,37 @@ public class CntrPessoa {
 
     @PostConstruct
     public void init() {
+        System.out.println("postconstruct");
         listestados = new PessoaDAO().listEstado();
+    }
+    
+    public CntrPessoa() {
+        System.out.println("instanciando pessoa");
+        pessoa = new Pessoa();
+//        listestados = new PessoaDAO().listEstado();
+    }
+
+    public CntrPessoa(int id, int qtdpessoas, String nome, String endereco, String cidade, String estado, String telefone, String bairro, Character tipopessoa, Date datanascimento, String email, Integer numeroresidencia, String cep, String cpf, Character sexo, String senha, String apelido) {
+    }
+    
+    public String testausuario(){
+       dao = new PessoaDAO();
+       if (dao.testausuario(pessoa).size()==1) {
+           return "sucesso";
+       } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Apelido ou Senha inválidos", null)); 
+            return "";
+       }
+    }
+    
+    public List<Pessoa> getListarPessoa() {
+//        lista = new PessoaDAO().listPessoa();
+//        listaPessoa = new ListDataModel(lista);
+//        pessoa = new Pessoa();
+        lista = new PessoaDAO().listPessoa();
+        qtdpessoas = lista.size();
+        System.out.println("listando pessoas na datatable");
+        return lista;
     }
     
     public void comboEstadoChange() {
@@ -44,7 +72,12 @@ public class CntrPessoa {
     public void comboEstadoChangeDialog() {
         pessoa.setCidade("");
         listacidade = new PessoaDAO().listCidade(pessoa.getEstado());
-    }    
+    }  
+
+    public void comboEstadoChangeDialog1() {
+        pessoa1.setCidade("");
+        listacidade = new PessoaDAO().listCidade(pessoa1.getEstado());
+    }  
     
     public void setListacidade(List<Cidade> listacidade) {
         this.listacidade = listacidade;
@@ -69,15 +102,14 @@ public class CntrPessoa {
     public void setNomeestado(String nomeestado) {
         this.nomeestado = nomeestado;
     }
-
-    public CntrPessoa() {
-        pessoa = new Pessoa();
-        listestados = new PessoaDAO().listEstado();
+    public String getConfirmasenha() {
+        return confirmasenha;
     }
 
-    public CntrPessoa(int id, int qtdpessoas, String nome, String endereco, String cidade, String estado, String telefone, String bairro, Character tipopessoa, Date datanascimento, String email, Integer numeroresidencia, String cep, String cpf, Character sexo, String senha, String apelido) {
+    public void setConfirmasenha(String confirmasenha) {
+        this.confirmasenha = confirmasenha;
     }
-
+    
     public int getQtdpessoas() {
         return qtdpessoas;
     }
@@ -86,23 +118,38 @@ public class CntrPessoa {
         this.qtdpessoas = qtdpessoas;
     }
 
-    public void prepararalterarPessoa() {
-        pessoa = (Pessoa) (listaPessoa.getRowData());
+    public Pessoa getPessoa1() {
+        return pessoa1;
+    }
+
+    public void setPessoa1(Pessoa pessoa1) {
+        this.pessoa1 = pessoa1;
+    }
+    
+    public void prepararalterarPessoa(Pessoa pessoa) {
+//        pessoa1 = (Pessoa) (listaPessoa.getRowData());
+        pessoa1 = pessoa;
         dao = new PessoaDAO();
-        listacidade = new PessoaDAO().listCidade(pessoa.getEstado());
-        nomeestado = dao.pegaestado(pessoa.getEstado()).getnomeestado();
-        System.out.println("pessoa posicionada:"+pessoa.getNome()+" "+pessoa.getEmail()+pessoa.getEstado()+" "+nomeestado);
+        listacidade = new PessoaDAO().listCidade(pessoa1.getEstado());
+        nomeestado = dao.pegaestado(pessoa1.getEstado()).getnomeestado();
+        System.out.println("pessoa posicionada:"+pessoa1.getNome()+" "+pessoa1.getId());
     }
 
     public void alterarPessoa() {
-        System.out.println("tentando salvar pessoa");
+        System.out.println("tentando salvar pessoa:"+pessoa1.getNome()+" Apelido:"+pessoa1.getApelido()+" ID:"+pessoa1.getId());
         dao = new PessoaDAO();
-        dao.update(pessoa);
-        System.out.println("Salvando-->"+pessoa.getEstado()+" "+pessoa.getCidade());
+        //pessoa.setId(getId());
+        dao.update(pessoa1);
+        System.out.println("Salvando-->"+pessoa1.getEstado()+" "+pessoa1.getCidade());
 //            rc.execute("PF('pessoaDialog').hide()");
         
     }
 
+    public void limparCampos(){
+        System.out.println("limpando");
+      pessoa = new Pessoa();    
+    }
+    
     public void addpessoa() {
         pessoa.setTipopessoa('1');      
         dao = new PessoaDAO();
@@ -110,17 +157,10 @@ public class CntrPessoa {
         pessoa = new Pessoa();
     }
     
-    public DataModel getListarPessoa() {
-        lista = new PessoaDAO().listPessoa();
-        listaPessoa = new ListDataModel(lista);
-        qtdpessoas = listaPessoa.getRowCount();
-        return listaPessoa;
-    }
-
-    public String excluirPessoa() {
-        Pessoa pessoaTemp = (Pessoa) (listaPessoa.getRowData());
+    public String excluirPessoa(Pessoa pessoa) {
+//        Pessoa pessoaTemp = (Pessoa) (listaPessoa.getRowData());
         dao = new PessoaDAO();
-        dao.remove(pessoaTemp);
+        dao.remove(pessoa);
         return "pessoa";
     }
 

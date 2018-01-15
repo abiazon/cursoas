@@ -6,20 +6,17 @@
       xmlns:p="http://primefaces.org/ui">
 
     <f:view contentType="text/html">
+
         <h:head>
-            
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <link type="text/css" rel="stylesheet" href="/css/estilos.css" />
                 <title>Curso Prodasa</title>
             </f:facet>
-           
         </h:head>
 
         <h:body>
-
             <p:layout fullPage="true">
-
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
                     Header
                 </p:layoutUnit>
@@ -33,11 +30,9 @@
                         <p:submenu label="Resources">
                             <p:menuitem value="Cadastro de Pessoa" outcome="pessoa" />
                             <p:menuitem value="Cadastro de Curso" outcome="curso" />
+                            <p:menuitem value="Login" outcome="login" />
                             <p:menuitem value="Mandar Email" outcome="email" />
-                            
-
                         </p:submenu>
-
                     </p:menu>
                 </p:layoutUnit>
 

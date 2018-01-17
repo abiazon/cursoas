@@ -48,7 +48,7 @@ public class CntrPessoa {
     public String testausuario(){
        dao = new PessoaDAO();
        if (dao.testausuario(pessoa).size()==1) {
-           return "sucesso";
+           return "pag-sucesso";
        } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Apelido ou Senha inválidos", null)); 
             return "";

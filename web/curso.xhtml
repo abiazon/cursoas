@@ -11,23 +11,42 @@
         <link type="text/css" rel="stylesheet" href="/css/estilos.css" />
     </h:head>
     <h:body>
+        <p align="right">Usuário:<b>#{cntrUsuario.usuario}</b></p>
+       
         <h:form id="formulario">
             <p:panel header="Incluir Cursos">
                 <h:panelGrid columns="3" id="grid" width="100%" border="1" styleClass="comBordaSimples" columnClasses="texto,form,messages">
                     <h:outputText value="Nome Curso" />
-                    <p:inputText id="nome" value="#{cntrCurso.curso.nome}" size="50" required="true" requiredMessage="Nome Obrigatório"/>
+                    <p:inputText id="nome" value="#{cntrCurso.curso.nome}" size="50" required="true" requiredMessage="Nome Obrigatório" >
+                    </p:inputText>
+                   
                     <p:message for="nome"/>
-                    <h:outputText value="Data Inicio"/>
-                    <p:calendar id="dti" value="#{cntrCurso.curso.datainicio}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Data Inicio Obrigatória"/>
+                    <h:outputText value="Data Inicio Matrícula"/>
+                    <p:calendar id="dti" value="#{cntrCurso.curso.datainiciomatricula}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Inicio Matrícula Obrigatória"/>
                     <p:message for="dti" />
-                    <h:outputText value="Data Final"/>
-                    <p:calendar id="dtf" value="#{cntrCurso.curso.datafim}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Data Fim Obrigatória"/>
+                    <h:outputText value="Data Final Matrícula"/>
+                    <p:calendar id="dtf" value="#{cntrCurso.curso.datafimmatricula}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Fim Matrícula Obrigatória" >
+                        <f:attribute name="dtia" value="#{cntrCurso.curso.datainiciomatricula}" />
+                        <f:validator validatorId="dticursoValidator" />
+                    </p:calendar>
                     <p:message for="dtf" />
+                    <h:outputText value="Data Início Curso"/>
+                    <p:calendar id="dtic" value="#{cntrCurso.curso.datainiciocurso}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Inicio Curso Obrigatório"/>
+                    <p:message for="dtic" />
+
+                    <h:outputText value="Horário Inicio Curso"/>
+                    <p:inputMask id="hrmm" value="#{cntrCurso.curso.horario}" mask="99:99" required="true" requiredMessage="Horario Inicio é Obrigatório"/>
+                    <p:message for="hrmm" />
+                    
                     <h:outputText value="Valor Curso"/>
                     <p:inputNumber id="preco" converter="javax.faces.Double" value="#{cntrCurso.curso.valorcurso}" size="10" required="true" requiredMessage="Valor Obrigatório"
                                    symbol="R$ " decimalSeparator="," thousandSeparator="." style="text-align:center" />
                     <p:message for="preco" />
-
+                   
+                    <h:outputText id="descur" value="Informações Curso"/>
+                    <p:inputTextarea id="infcur" value="#{cntrCurso.curso.descricaocurso}"/>
+                    <p:message for="descur" />
+                    
                     <p:commandButton value="Gravar" action="#{cntrCurso.addcursco()}" update=":formtable:tabelaCurso,grid"/>
                     <p:commandButton value="Limpar" type="reset"/>
                 </h:panelGrid>
@@ -39,16 +58,16 @@
                 <f:facet name="header">
                     Lista de Cursos Cadastrados
                 </f:facet>
-                <p:column headerText="Nome" width="60%" filterMaxLength="20" sortBy="#{cur.nome}" filterBy="#{cur.nome}">
+                <p:column headerText="Nome" width="60%" filterMaxLength="80" sortBy="#{cur.nome}" filterBy="#{cur.nome}" filterStyle="max-width: 400px; min-width:400px;">
                     <h:outputText value="#{cur.nome}"/>
                 </p:column>
-                <p:column headerText="Data Início" filterBy="#{cur.datainicio}">
-                    <h:outputText value="#{cur.datainicio}">
+                <p:column headerText="Data Início" filterBy="#{cur.datainiciomatricula}">
+                    <h:outputText value="#{cur.datainiciomatricula}">
                         <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
                     </h:outputText>
                 </p:column>
-                <p:column headerText="Data Fim" filterBy="#{cur.datafim}">
-                    <h:outputText value="#{cur.datafim}">
+                <p:column headerText="Data Fim" filterBy="#{cur.datafimmatricula}">
+                    <h:outputText value="#{cur.datafimmatricula}">
                         <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
                     </h:outputText>
                 </p:column>
@@ -78,10 +97,10 @@
                     <h:outputText value="Nome" />
                     <p:inputText id="nomed" size="50" value="#{cntrCurso.curso.nome}" required="true" style="font-weight:bold"/>
                     <h:outputText value="Data Inicial" />
-                    <p:calendar id="dtid" size="10" value="#{cntrCurso.curso.datainicio}" required="true" style="font-weight:bold" pattern="dd/MM/yyyy">
+                    <p:calendar id="dtid" size="10" value="#{cntrCurso.curso.datainiciomatricula}" required="true" style="font-weight:bold" pattern="dd/MM/yyyy">
                     </p:calendar>
                     <h:outputText value="Data Final" />
-                    <p:calendar id="dtfd" size="10" value="#{cntrCurso.curso.datafim}" required="true" style="font-weight:bold" pattern="dd/MM/yyyy">
+                    <p:calendar id="dtfd" size="10" value="#{cntrCurso.curso.datafimmatricula}" required="true" style="font-weight:bold" pattern="dd/MM/yyyy">
                     </p:calendar>
                     <h:outputText value="Preço" />
                     <p:inputNumber id="precod" converter="javax.faces.Double" size="8" value="#{cntrCurso.curso.valorcurso}" required="true" style="font-weight:bold" 

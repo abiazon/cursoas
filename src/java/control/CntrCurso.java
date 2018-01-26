@@ -6,8 +6,11 @@
 package control;
 
 import dao.CursoDAO;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
@@ -29,9 +32,12 @@ public class CntrCurso {
     private Curso curso;
     private CursoDAO dao;
     List<Curso> lista;
+    List maphora,mapminuto;
 
     public CntrCurso() {
         curso = new Curso();
+        listahora();
+        listaminuto();
 //        valorcurso = 0d;
     }
 
@@ -49,7 +55,37 @@ public class CntrCurso {
         qtdcursos=listarCurso.getRowCount();
         return listarCurso;
     }
+    
+    public final void listahora(){
+        maphora= new ArrayList();
+        for (int i=0; i<23;i++)  {
+          maphora.add(i);
+        }
+    }
+    
+    public final void listaminuto(){
+        mapminuto = new ArrayList();
+        for (int i=0; i<59;i++)  {
+          mapminuto.add(i);
+        }
+    }
+    
+    public List getMaphora() {
+        return maphora;
+    }
 
+    public void setMaphora(List maphora) {
+        this.maphora = maphora;
+    }
+
+    public List getMapminuto() {
+        return mapminuto;
+    }
+
+    public void setMapminuto(List mapminuto) {
+        this.mapminuto = mapminuto;
+    }
+    
     public int getQtdcursos() {
         return qtdcursos;
     }
@@ -81,58 +117,11 @@ public class CntrCurso {
         dao = new CursoDAO();
         dao.update(curso);
     }
-    
-  //  public void addarraycurso() {
-  //  }
 
     public void addcursco() {
-//       curso = new Curso(getNome(), getDatainicio(), getValorcurso(), getDatafim());
        dao = new CursoDAO();
        dao.addCurso(curso);
        curso = new Curso();
-       //nome="";
-       //datainicio=null;
-       //datafim=null;
-       //valorcurso=null;
     }
 
-//    public int getId() {
-//        return id;
-//    }
-
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-
-    //public String getNome() {
-    //    return nome;
-    //}
-
-    //public void setNome(String nome) {
-    //    this.nome = nome;
-    //}
-
-    //public Date getDatainicio() {
-    //    return datainicio;
-    //}
-
-    //public void setDatainicio(Date datainicio) {
-    //    this.datainicio = datainicio;
-    //}
-
-    //public Double getValorcurso() {
-    //    return valorcurso;
-    //}
-
-    //public void setValorcurso(Double valorcurso) {
-    //    this.valorcurso = valorcurso;
-    //}
-
-    //public Date getDatafim() {
-    //    return datafim;
-    //}
-
-    //public void setDatafim(Date datafim) {
-    //    this.datafim = datafim;
-    //}
 }

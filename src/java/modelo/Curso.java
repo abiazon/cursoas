@@ -1,7 +1,6 @@
 package modelo;
 // Generated 25/10/2017 08:09:13 by Hibernate Tools 4.3.1
 
-
 import java.util.Date;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,33 +13,35 @@ public class Curso implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_curso_id")
-     private int id;
-     private String nome;
-     private Date datainicio;
-     private Date datafim;
-     private Double valorcurso;
+    private int id;
+    private String nome;
+    private Date datainiciomatricula;
+    private Date datafimmatricula;
+    private Date datainiciocurso;
+    private String horario;
+    private String professor;
+    private String descricaocurso;
+    private Double valorcurso;
 
     public Curso() {
     }
 
-    public Curso(String nome, Date datainicio, Double valorcurso, Date datafim) {
-        this.nome = nome;
-        this.datainicio = datainicio;
-        this.datafim = datafim;
-        this.valorcurso = valorcurso;
+   public Curso(int id, String nome, Date datainiciomatricula, Date datafimmatricula, Double valorcurso, Date datainiciocurso, String horario, String professor, String descricaocurso) {
+       this.id = id;
+       this.nome = nome;
+       this.datainiciomatricula = datainiciomatricula;
+       this.datafimmatricula = datafimmatricula;
+       this.valorcurso = valorcurso;
+       this.datainiciocurso = datainiciocurso;
+       this.horario = horario;
+       this.professor = professor;
+       this.descricaocurso = descricaocurso;
     }
-	
+ 
     public Curso(int id) {
         this.id = id;
     }
-    public Curso(int id, String nome, Date datainicio, Date datafim, Double valorcurso) {
-       this.id = id;
-       this.nome = nome;
-       this.datainicio = datainicio;
-       this.datafim = datafim;
-       this.valorcurso = valorcurso;
-    }
-   
+
     public int getId() {
         return this.id;
     }
@@ -55,20 +56,7 @@ public class Curso implements java.io.Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public Date getDatainicio() {
-        return this.datainicio;
-    }
-    
-    public void setDatainicio(Date datainicio) {
-        this.datainicio = datainicio;
-    }
-    public Date getDatafim() {
-        return this.datafim;
-    }
-    
-    public void setDatafim(Date datafim) {
-        this.datafim = datafim;
-    }
+
     public Double getValorcurso() {
         return this.valorcurso;
     }
@@ -76,10 +64,51 @@ public class Curso implements java.io.Serializable {
     public void setValorcurso(Double valorcurso) {
         this.valorcurso = valorcurso;
     }
+        public Date getDatainiciomatricula() {
+        return datainiciomatricula;
+    }
 
+    public void setDatainiciomatricula(Date datainiciomatricula) {
+        this.datainiciomatricula = datainiciomatricula;
+    }
 
+    public Date getDatafimmatricula() {
+        return datafimmatricula;
+    }
 
+    public void setDatafimmatricula(Date datafimmatricula) {
+        this.datafimmatricula = datafimmatricula;
+    }
 
+    public Date getDatainiciocurso() {
+        return datainiciocurso;
+    }
+
+    public void setDatainiciocurso(Date datainiciocurso) {
+        this.datainiciocurso = datainiciocurso;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
+
+    public String getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(String professor) {
+        this.professor = professor;
+    }
+
+    public String getDescricaocurso() {
+        return descricaocurso;
+    }
+
+    public void setDescricaocurso(String descricaocurso) {
+        this.descricaocurso = descricaocurso;
+    }     
 }
-
-

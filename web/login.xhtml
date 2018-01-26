@@ -14,15 +14,15 @@
                     <p:messages id="aviso" closable="true"></p:messages>
                     <h:panelGrid columns="2" cellpadding="5" id="gridlogin">
                     <h:outputText value="Apelido " />
-                    <p:inputText id="usuario" value="#{cntrPessoa.pessoa.apelido}" required="true" requiredMessage="Você não digitou um apelido"/>
+                    <p:inputText id="usuario" value="#{cntrUsuario.usuario}" required="true" requiredMessage="Você não digitou um apelido"/>
 
                     <h:outputText value="Senha " />
-                    <p:password id="senha" value="#{cntrPessoa.pessoa.senha}" required="true"  requiredMessage="Você não digitou uma senha." />
+                    <p:password id="senha" value="#{cntrUsuario.senha}" required="true"  requiredMessage="Você não digitou uma senha." />
                     <h:outputText></h:outputText>
                     
                 </h:panelGrid>
                     <fieldset style="border:0px; bottom:10px; position:absolute; margin:10px;">
-                        <p:commandButton value="Entrar" action="#{cntrPessoa.testausuario()}" update="panellogin,gridlogin"/>
+                        <p:commandButton value="Entrar" action="#{cntrUsuario.testausuario()}" update="panellogin,gridlogin"/>
                         <h:link outcome="index" styleClass="link" value="Cadastre-se"/><br/>
                     </fieldset>
                 </p:panel>

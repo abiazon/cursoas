@@ -45,16 +45,6 @@ public class CntrPessoa {
     public CntrPessoa(int id, int qtdpessoas, String nome, String endereco, String cidade, String estado, String telefone, String bairro, Character tipopessoa, Date datanascimento, String email, Integer numeroresidencia, String cep, String cpf, Character sexo, String senha, String apelido) {
     }
     
-    public String testausuario(){
-       dao = new PessoaDAO();
-       if (dao.testausuario(pessoa).size()==1) {
-           return "pag-sucesso";
-       } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Apelido ou Senha inválidos", null)); 
-            return "";
-       }
-    }
-    
     public List<Pessoa> getListarPessoa() {
 //        lista = new PessoaDAO().listPessoa();
 //        listaPessoa = new ListDataModel(lista);

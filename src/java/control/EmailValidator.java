@@ -26,6 +26,7 @@ public class EmailValidator implements Validator{
 
     @Override
     public void validate(FacesContext facesContext, UIComponent componente, Object valor) throws ValidatorException {
+        System.out.println("VALIDATOREMAIL");
         String email = (String) valor;
         dao = new PessoaDAO();
         listaemail = dao.getPessoaemail(email);

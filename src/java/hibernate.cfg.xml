@@ -41,16 +41,16 @@ Contributor(s):
 -->
 <hibernate-configuration>
   <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/cursosas</property>
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">prodasadb</property>
-    <mapping resource="modelo/Curso.hbm.xml"/>
     <mapping resource="modelo/Cursopalestrante.hbm.xml"/>
     <mapping resource="modelo/Pessoa.hbm.xml"/>
     <mapping resource="modelo/Estado.hbm.xml"/>
     <mapping resource="modelo/Cidade.hbm.xml"/>
     <mapping resource="modelo/Inscritoscurso.hbm.xml"/>
+    <mapping resource="modelo/Curso.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

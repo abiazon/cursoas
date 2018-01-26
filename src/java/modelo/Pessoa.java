@@ -14,23 +14,23 @@ public class Pessoa implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pessoa_id")
-     private int id;
-     private String nome;
-     private String endereco;
-     private String cidade;
-     private String estado;
-     private String telefone;
-     private String celular;
-     private String bairro;
-     private Character tipopessoa;
-     private Date datanascimento;
-     private String email;
-     private Integer numeroresidencia;
-     private String cep;
-     private String cpf;
-     private Character sexo;
-     private String senha;
-     private String apelido;
+    private int id;
+    private String nome;
+    private String endereco;
+    private String cidade;
+    private String estado;
+    private String telefone;
+    private String celular;
+    private String bairro;
+    private Character tipopessoa;
+    private Date datanascimento;
+    private String email;
+    private Integer numeroresidencia;
+    private String cep;
+    private String cpf;
+    private Character sexo;
+    private String senha;
+    private String apelido;
 
     public Pessoa() {
     }

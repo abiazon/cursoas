@@ -3,6 +3,8 @@
   <persistence-unit name="cursoasPU" transaction-type="JTA">
     <jta-data-source>java:app/ok</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
+    <shared-cache-mode>ALL</shared-cache-mode>
+    <properties>
+    </properties>
   </persistence-unit>
 </persistence>

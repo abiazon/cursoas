@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 25/10/2017 08:09:14 by Hibernate Tools 4.3.1 -->
+<!-- Generated 25/01/2018 10:21:42 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="modelo.Curso" table="curso" schema="public" optimistic-lock="version">
         <id name="id" type="int">
@@ -11,14 +11,26 @@
         <property name="nome" type="string">
             <column name="nome" length="100" />
         </property>
-        <property name="datainicio" type="date">
-            <column name="datainicio" length="13" />
+        <property name="datainiciomatricula" type="date">
+            <column name="datainiciomatricula" length="13" />
         </property>
-        <property name="datafim" type="date">
-            <column name="datafim" length="13" />
+        <property name="datafimmatricula" type="date">
+            <column name="datafimmatricula" length="13" />
         </property>
         <property name="valorcurso" type="java.lang.Double">
             <column name="valorcurso" precision="17" scale="17" />
+        </property>
+        <property name="datainiciocurso" type="date">
+            <column name="datainiciocurso" length="13" />
+        </property>
+        <property name="horario" type="string">
+            <column name="horario" length="5" />
+        </property>
+        <property name="professor" type="string">
+            <column name="professor" length="80" />
+        </property>
+        <property name="descricaocurso" type="string">
+            <column name="descricaocurso" />
         </property>
     </class>
 </hibernate-mapping>

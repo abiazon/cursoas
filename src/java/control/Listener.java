@@ -32,32 +32,37 @@ public class Listener implements PhaseListener{
         System.out.println("VIEWID:"+viewId);
         System.out.println("PAGINA:"+cntrUsuario.pagina);
         try {
-         HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();			
-         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-         Boolean conectado = (Boolean) session.getAttribute("autenticado");			
-         if (conectado == null) {
-                System.out.println("CONECTADO NULO");
-                for (String pag : paginacomlogin ){
-                    if (pag.equals(viewId)){
-                        cntrUsuario.pagina=viewId.replace("/","");
-                        FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+            HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();			
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            Boolean conectado = (Boolean) session.getAttribute("autenticado");			
+            if (conectado == null) {
+                   System.out.println("CONECTADO NULO");
+                   for (String pag : paginacomlogin ){
+                       if (pag.equals(viewId)){
+                           cntrUsuario.pagina=viewId.replace("/","");
+                           FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+                           
+                       }
+                   }
+                   //return;
+            } else {
+                if (!conectado) {
+                    if (!viewId.equals("/login.xhtml")) {
+                       System.out.println("desconectado");
+                       FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
                     }
+                } else {
+                        System.out.println("conectado");
+                        //return;
+                       // FacesContext.getCurrentInstance().getExternalContext().redirect("curso.xhtml");
                 }
-                return;
-         }
-         if (!conectado) {	
-                 System.out.println("desconectado");
-                 FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
-         } else {
-                 System.out.println("conectado");
-                 return;
-                // FacesContext.getCurrentInstance().getExternalContext().redirect("curso.xhtml");
-         }
-         response.setHeader("Expires", "-1");
-         response.setHeader("Cache-Control", "no-store, no-cache, must-revalidade, proxy-revalidade, private, post-check=0, pre-check=0");
-         response.setHeader("Pragma", "no-cache");
-         } catch (Exception e) {			
-         }        
+            }
+            response.setHeader("Expires", "-1");
+            response.setHeader("Cache-Control", "no-store, no-cache, must-revalidade, proxy-revalidade, private, post-check=0, pre-check=0");
+            response.setHeader("Pragma", "no-cache");
+//            return;
+        } catch (IOException e) {			
+        }        
 //comentado porem funcionando
        /*        FacesContext ctx = FacesContext.getCurrentInstance();
         if(!ctx.getViewRoot().getViewId().equals("/login.xhtml")){

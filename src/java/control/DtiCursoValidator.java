@@ -11,12 +11,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
+import modelo.Curso;
 
 /**
  *
@@ -29,12 +32,13 @@ public class DtiCursoValidator implements Validator{
     
     @Override
     public void validate(FacesContext facesContext, UIComponent componente, Object valor) throws ValidatorException {
-        Date dataa = (Date) valor;
+       System.out.println("in valid GGGGGGGG");
 
-        String dataant = (String) componente.getAttributes().get("dtia");
-        UIInput param1 = (UIInput) componente.findComponent("dtia");
-//        System.out.println("DATA:"+data + " DATAANTES:"+dataant+ " outro:"+param1 );
-System.out.println("data:"+dataa+" :"+dataant+" :"+param1);
+        Date dataa = (Date) valor;
+        String bosta = (String) componente.getAttributes().get("dtia");
+        String dataanta = (String) componente.getAttributes().get("dtf");
+
+        System.out.println("data:"+dataa+" :"+bosta+" :"+dataanta);
     }
     
 }

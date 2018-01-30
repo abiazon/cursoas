@@ -39,7 +39,7 @@ public class Listener implements PhaseListener{
                 System.out.println("CONECTADO NULO");
                 for (String pag : paginacomlogin ){
                     if (pag.equals(viewId)){
-                        cntrUsuario.pagina=viewId;
+                        cntrUsuario.pagina=viewId.replace("/","");
                         FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
                     }
                 }

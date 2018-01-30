@@ -9,6 +9,7 @@ import dao.PessoaDAO;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
@@ -52,11 +53,18 @@ public class ApelidoValidator implements Validator{
                     throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,"Apelido já Utilizado", null));
             } else if (listaapelido.size()==1) {
                 HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
-                if(req.getParameter("cpf") != null && !req.getParameter("cpf").equals("")){
-                    String cpf = listaapelido.get(0).getCpf();
-                    String cpfatual = req.getParameter("cpf");
-                    if (!cpf.equals(cpfatual)){
-                        throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Apelido já Utilizado", null));
+                System.out.println("testando parametro:"+req.getParameter("cpf"));
+                
+                if(req.getParameter("cpf") != null){
+                    String cpfatual= req.getParameter("cpf");
+                    System.out.println("CPFATUAL:"+cpfatual);
+                    if (cpfatual.equals("")) {
+                        throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Apelido já Utilizado", null));                     
+                    } else {
+                        String cpf = listaapelido.get(0).getCpf();
+                        if (!cpf.equals(cpfatual)){
+                            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Apelido já Utilizado", null));
+                        }
                     }
                 }
             }

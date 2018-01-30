@@ -1,6 +1,7 @@
 package control;
 
 import dao.PessoaDAO;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -9,8 +10,9 @@ import javax.faces.model.DataModel;
 import modelo.Cidade;
 import modelo.Estado;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+import javax.enterprise.context.ConversationScoped;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ViewScoped;
 import modelo.Pessoa;
 
 

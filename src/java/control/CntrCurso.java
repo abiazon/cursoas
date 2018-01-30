@@ -6,24 +6,24 @@
 package control;
 
 import dao.CursoDAO;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import modelo.Curso;
 
-@ManagedBean    
+@ManagedBean
 @SessionScoped
 /**
  *
  * @author bruno
  */
-public class CntrCurso {
+public class CntrCurso implements Serializable {
     private int qtdcursos;
     //private String nome;
     //private Date datainicio, datafim;
@@ -31,8 +31,17 @@ public class CntrCurso {
     private DataModel<Curso> listarCurso;
     private Curso curso;
     private CursoDAO dao;
-    List<Curso> lista;
-    List maphora,mapminuto;
+    public List<Curso> lista;
+    public List maphora,mapminuto;
+    public Date guarda;
+
+    public Date getGuarda() {
+        return guarda;
+    }
+
+    public void setGuarda(Date guarda) {
+        this.guarda = guarda;
+    }
 
     public CntrCurso() {
         curso = new Curso();
@@ -118,7 +127,8 @@ public class CntrCurso {
         dao.update(curso);
     }
 
-    public void addcursco() {
+    public void addcurso() {
+       guarda = curso.getDatafimmatricula();
        dao = new CursoDAO();
        dao.addCurso(curso);
        curso = new Curso();

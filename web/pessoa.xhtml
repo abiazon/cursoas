@@ -63,14 +63,14 @@
                     <h:outputText value="Email" />
                     <p:inputText id="email" value="#{cntrPessoa.pessoa.email}" size="40" required="true" label="Email" requiredMessage="E-mail Obrigatório">
                         <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
-                        <f:attribute name="cpf" value="" />
                         <f:validator validatorId="emailValidator"/>
+                        <f:attribute name="cpf" value="" />
                     </p:inputText>
                     <p:message for="email" />
                     <h:outputText value="CPF" />
                     <p:inputMask id="cpf" value="#{cntrPessoa.pessoa.cpf}" converter="cpfConverter" mask="999.999.999-99" size="14" required="true" requiredMessage="CPF Obrigatório">
-                        <f:attribute name="cpf" value="" />
                         <f:validator validatorId="cpfValidator"/>
+                        <f:attribute name="cpf" value="" />
                     </p:inputMask> 
                     <p:message for="cpf" /> 
                     <p:outputLabel id="sexo" for="sexo" value="Sexo:" />
@@ -79,10 +79,10 @@
                         <f:selectItem itemLabel="Feminino" itemValue="F" />
                     </p:selectOneRadio>
                     <p:message for="sexo"/> 
-                    <h:outputText value="Apelido" />
-                    <p:inputText id="apelido" value="#{cntrPessoa.pessoa.apelido}" size="20" required="true" requiredMessage="Apelido é Obrigatório">
-                        <f:attribute name="cpf" value="" />
+                    <p:outputText value="Apelido" />
+                    <p:inputText id="apelido" value="#{cntrPessoa.pessoa.apelido}" size="20" required="true" requiredMessage="Apelido é Obrigatório" >
                         <f:validator validatorId="apelidoValidator"/>
+                        <f:attribute name="cpf" value="bo" />
                     </p:inputText>
                     <p:message id="mensagem-apelido" for="apelido" />
                     

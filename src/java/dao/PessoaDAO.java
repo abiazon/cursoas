@@ -24,6 +24,7 @@ import util.NewHibernateUtil;
 public class PessoaDAO {
     
     public void addPessoa(Pessoa pessoa) {
+        System.out.println("hhhhhhhh");
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         try {
@@ -35,6 +36,7 @@ public class PessoaDAO {
                 tx.rollback();
             }
         } finally {
+            System.out.println("iiiiiiii");
             session.flush();
             session.close();
         }
@@ -43,8 +45,8 @@ public class PessoaDAO {
     public List<Pessoa> listPessoa() {
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         List lista = session.createQuery("from Pessoa").list();
-        session.flush();
-        session.close();
+//        session.flush();
+//        session.close();
         return lista;
     }
     
@@ -54,8 +56,8 @@ public class PessoaDAO {
         Query query = session.createQuery(queryString);
         query.setString("idToFind", estado);
         List listacidade = query.list(); 
-        session.flush();
-        session.close();
+//        session.flush();
+//        session.close();
         return listacidade;
     }
     
@@ -66,16 +68,16 @@ public class PessoaDAO {
         query.setString("apelToFind", usuario);
         query.setString("senhaToFind", senha);
         List checalogin = query.list();
-        session.flush();
-        session.close();
+//        session.flush();
+//        session.close();
         return checalogin;
     }
     
     public List<Estado> listEstado() {
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         List listaestado = session.createQuery("from Estado").list();
-        session.flush();
-        session.close();
+//        session.flush();
+//        session.close();
         return listaestado;
     }
     
@@ -91,6 +93,7 @@ public class PessoaDAO {
                 tx.rollback();
             }
         } finally {
+//            System.out.println("FLUSH");
             session.flush();
             session.close();
         }
@@ -143,8 +146,8 @@ public class PessoaDAO {
         Query query = session.createQuery(queryString);
         query.setString("idToFind", ufestado);
         estado = (Estado) query.uniqueResult();
-        session.flush();
-        session.close();
+//        session.flush();
+//        session.close();
         return estado;
     }
 

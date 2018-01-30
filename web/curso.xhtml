@@ -24,18 +24,19 @@
                     <h:outputText value="Data Inicio Matrícula"/>
                     <p:calendar id="dti" value="#{cntrCurso.curso.datainiciomatricula}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Inicio Matrícula Obrigatória"/>
                     <p:message for="dti" />
+                   
                     <h:outputText value="Data Final Matrícula"/>
-                    <p:calendar id="dtf" value="#{cntrCurso.curso.datafimmatricula}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Fim Matrícula Obrigatória" >
-                        <f:attribute name="dtia" value="#{cntrCurso.curso.datainiciomatricula}" />
-                        <f:validator validatorId="dticursoValidator" />
+                    <p:calendar id="dtf" value="#{cntrCurso.curso.datafimmatricula}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Fim Matrícula Obrigatória" validator="dticursoValidator">
+                        <f:attribute name="dtia" value="#{cntrCurso.guarda}" />
                     </p:calendar>
                     <p:message for="dtf" />
+                    
                     <h:outputText value="Data Início Curso"/>
                     <p:calendar id="dtic" value="#{cntrCurso.curso.datainiciocurso}" pattern="dd/MM/yyyy" size="10" required="true" requiredMessage="Inicio Curso Obrigatório"/>
                     <p:message for="dtic" />
 
                     <h:outputText value="Horário Inicio Curso"/>
-                    <p:inputMask id="hrmm" value="#{cntrCurso.curso.horario}" mask="99:99" required="true" requiredMessage="Horario Inicio é Obrigatório"/>
+                    <p:calendar id="hrmm" value="#{cntrCurso.curso.horario}" pattern="HH:mm" timeOnly="true" required="true" requiredMessage="Horario Inicio é Obrigatório"/>
                     <p:message for="hrmm" />
                     
                     <h:outputText value="Valor Curso"/>
@@ -47,7 +48,7 @@
                     <p:inputTextarea id="infcur" value="#{cntrCurso.curso.descricaocurso}"/>
                     <p:message for="descur" />
                     
-                    <p:commandButton value="Gravar" action="#{cntrCurso.addcursco()}" update=":formtable:tabelaCurso,grid"/>
+                    <p:commandButton value="Gravar" action="#{cntrCurso.addcurso()}" update=":formtable:tabelaCurso,grid"/>
                     <p:commandButton value="Limpar" type="reset"/>
                 </h:panelGrid>
             </p:panel>

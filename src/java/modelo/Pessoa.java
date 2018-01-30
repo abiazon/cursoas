@@ -3,6 +3,7 @@ package modelo;
 
 
 import java.util.Date;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;

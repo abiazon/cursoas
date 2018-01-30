@@ -18,7 +18,7 @@ public class Curso implements java.io.Serializable {
     private Date datainiciomatricula;
     private Date datafimmatricula;
     private Date datainiciocurso;
-    private String horario;
+    private Date horario;
     private String professor;
     private String descricaocurso;
     private Double valorcurso;
@@ -26,7 +26,7 @@ public class Curso implements java.io.Serializable {
     public Curso() {
     }
 
-   public Curso(int id, String nome, Date datainiciomatricula, Date datafimmatricula, Double valorcurso, Date datainiciocurso, String horario, String professor, String descricaocurso) {
+   public Curso(int id, String nome, Date datainiciomatricula, Date datafimmatricula, Double valorcurso, Date datainiciocurso, Date horario, String professor, String descricaocurso) {
        this.id = id;
        this.nome = nome;
        this.datainiciomatricula = datainiciomatricula;
@@ -88,11 +88,11 @@ public class Curso implements java.io.Serializable {
         this.datainiciocurso = datainiciocurso;
     }
 
-    public String getHorario() {
+    public Date getHorario() {
         return horario;
     }
 
-    public void setHorario(String horario) {
+    public void setHorario(Date horario) {
         this.horario = horario;
     }
 

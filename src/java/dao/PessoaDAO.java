@@ -8,6 +8,7 @@ package dao;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.model.DataModel;
 import modelo.Cidade;
 import modelo.Estado;
 import modelo.Pessoa;
@@ -24,7 +25,6 @@ import util.NewHibernateUtil;
 public class PessoaDAO {
     
     public void addPessoa(Pessoa pessoa) {
-        System.out.println("hhhhhhhh");
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         try {
@@ -36,7 +36,6 @@ public class PessoaDAO {
                 tx.rollback();
             }
         } finally {
-            System.out.println("iiiiiiii");
             session.flush();
             session.close();
         }
@@ -45,8 +44,6 @@ public class PessoaDAO {
     public List<Pessoa> listPessoa() {
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         List lista = session.createQuery("from Pessoa").list();
-//        session.flush();
-//        session.close();
         return lista;
     }
     
@@ -56,28 +53,22 @@ public class PessoaDAO {
         Query query = session.createQuery(queryString);
         query.setString("idToFind", estado);
         List listacidade = query.list(); 
-//        session.flush();
-//        session.close();
         return listacidade;
     }
     
-    public List testausuario(String usuario, String senha){
+    public List testausuario(String apelido, String senha){
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         String queryString = "from Pessoa where apelido= :apelToFind and senha= :senhaToFind";
         Query query = session.createQuery(queryString);
-        query.setString("apelToFind", usuario);
+        query.setString("apelToFind", apelido);
         query.setString("senhaToFind", senha);
         List checalogin = query.list();
-//        session.flush();
-//        session.close();
         return checalogin;
     }
     
     public List<Estado> listEstado() {
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         List listaestado = session.createQuery("from Estado").list();
-//        session.flush();
-//        session.close();
         return listaestado;
     }
     
@@ -93,7 +84,6 @@ public class PessoaDAO {
                 tx.rollback();
             }
         } finally {
-//            System.out.println("FLUSH");
             session.flush();
             session.close();
         }
@@ -146,8 +136,6 @@ public class PessoaDAO {
         Query query = session.createQuery(queryString);
         query.setString("idToFind", ufestado);
         estado = (Estado) query.uniqueResult();
-//        session.flush();
-//        session.close();
         return estado;
     }
 
@@ -204,4 +192,5 @@ public class PessoaDAO {
         }   
         return listaemail;
     }
+
 }

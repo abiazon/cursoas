@@ -38,6 +38,7 @@ public class cntrUsuario {
     public void setPagina(String pagina) {
         this.pagina = pagina;
     }
+    
     private PessoaDAO dao;
 
     public String getUsuario() {
@@ -82,9 +83,12 @@ public class cntrUsuario {
     }
     
     public String sair() {
+        System.out.println("SAINDO");
         HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         httpSession.removeAttribute("autenticado");
         httpSession.removeAttribute("usuario");
-        return "login";
+        httpSession.invalidate(); 
+        return "login.xhtml";
     }    
+   
 }

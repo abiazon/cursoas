@@ -26,14 +26,17 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
-                    <p:menu>
-                        <p:submenu label="Resources">
-                            <p:menuitem value="Cadastro de Pessoa" outcome="pessoa" />
-                            <p:menuitem value="Cadastro de Curso" outcome="curso" />
-                            <p:menuitem value="Login" outcome="login" />
-                            <p:menuitem value="Mandar Email" outcome="email" />
-                        </p:submenu>
-                    </p:menu>
+                    <h:form>
+                        <p:menubar>
+                            <p:submenu label="opções" icon="ui-icon-document">
+                                <p:menuitem value="Cadastro de Pessoa" outcome="pessoa" />
+                                <p:menuitem value="Cadastro de Curso" outcome="curso" />
+                                <p:menuitem value="Login" outcome="login" />
+                                <p:menuitem value="Mandar Email" outcome="email" />
+                                <p:menuitem value="Logout" action="#{cntrUsuario.sair()}"  icon="ui-icon-close" />
+                            </p:submenu>
+                        </p:menubar>
+                    </h:form>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">

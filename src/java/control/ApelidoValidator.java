@@ -42,30 +42,18 @@ public class ApelidoValidator implements Validator{
         } else {
             dao = new PessoaDAO();
             listaapelido = dao.getPessoaapelido(apelido);
-//            Pessoa pessoa = dao.getPessoaapelido(apelido);
             if (listaapelido.size()>1){
-//            if (pessoa != null){
-//                System.out.println("APELIDO:"+pessoa.getApelido());
-//                apelidobusca=pessoa.getApelido();
-//                if (apelido.equals(apelidobusca)) {
-//                    context.addMessage(componente.getClientId(), new FacesMessage(FacesMessage.SEVERITY_FATAL, "Apelido já Utilizado", null));
-    //                throw new ValidatorException(msg);
                     throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR,"Apelido já Utilizado", null));
             } else if (listaapelido.size()==1) {
-                HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
-                System.out.println("testando parametro:"+req.getParameter("cpf"));
-                
-                if(req.getParameter("cpf") != null){
-                    String cpfatual= req.getParameter("cpf");
-                    System.out.println("CPFATUAL:"+cpfatual);
-                    if (cpfatual.equals("")) {
-                        throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Apelido já Utilizado", null));                     
-                    } else {
-                        String cpf = listaapelido.get(0).getCpf();
-                        if (!cpf.equals(cpfatual)){
-                            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Apelido já Utilizado", null));
-                        }
+                String cpfatual = (String) componente.getAttributes().get("cpf"); 
+                System.out.println("teste:"+cpfatual);
+                if (!cpfatual.equals("")){
+                    String cpf = listaapelido.get(0).getCpf();
+                    if (!cpf.equals(cpfatual)){
+                        throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Apelido já Utilizado", null));
                     }
+                } else {
+                    throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Apelido já Utilizado", null));
                 }
             }
         }

@@ -8,7 +8,6 @@ package dao;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.model.DataModel;
 import modelo.Cidade;
 import modelo.Estado;
 import modelo.Pessoa;
@@ -44,15 +43,20 @@ public class PessoaDAO {
     public List<Pessoa> listPessoa() {
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         List lista = session.createQuery("from Pessoa").list();
+        session.flush();
+        session.close();
         return lista;
     }
     
     public List<Cidade> listCidade(String estado) {
+        System.out.println("listando cidade");
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         String queryString = "from Cidade where idunidFed = :idToFind order by NomeDesc";
         Query query = session.createQuery(queryString);
         query.setString("idToFind", estado);
         List listacidade = query.list(); 
+        session.flush();
+        session.close();
         return listacidade;
     }
     
@@ -63,12 +67,16 @@ public class PessoaDAO {
         query.setString("apelToFind", apelido);
         query.setString("senhaToFind", senha);
         List checalogin = query.list();
+session.flush();
+session.close();
         return checalogin;
     }
     
     public List<Estado> listEstado() {
         Session session = NewHibernateUtil.buildSessionFactory().openSession();
         List listaestado = session.createQuery("from Estado").list();
+session.flush();
+session.close();
         return listaestado;
     }
     
@@ -136,6 +144,8 @@ public class PessoaDAO {
         Query query = session.createQuery(queryString);
         query.setString("idToFind", ufestado);
         estado = (Estado) query.uniqueResult();
+session.flush();
+session.close();
         return estado;
     }
 

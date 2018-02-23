@@ -6,7 +6,7 @@
     <class name="modelo.Inscritoscurso" table="inscritoscurso" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="idaluno" type="java.lang.Integer">
             <column name="idaluno" />

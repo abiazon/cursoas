@@ -6,13 +6,10 @@
 package control;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -22,7 +19,7 @@ import javax.servlet.http.HttpSession;
  */
 public class Listener implements PhaseListener{
     private static final Long SerialVersionUID= 1L;
-    String paginacomlogin[]= new String[]{"/pessoa.xhtml","/curso.xhtml"};
+    String paginacomlogin[]= new String[]{"/pessoa.xhtml","/curso.xhtml","/pag-sucesso.xhtml"};
 
     @Override
     public void afterPhase(PhaseEvent pe) {
@@ -41,7 +38,6 @@ public class Listener implements PhaseListener{
                        if (pag.equals(viewId)){
                            cntrUsuario.pagina=viewId.replace("/","");
                            FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
-                           
                        }
                    }
                    //return;

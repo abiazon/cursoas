@@ -80,7 +80,7 @@
                     </div> 
                 </p:column>
                 <p:column>
-                    <p:commandButton action="#{cntrCurso.excluirCurso()}" icon="ui-icon-closethick" update="tabelaCurso" />
+                    <p:commandButton action="#{cntrCurso.excluirCurso(cur)}" icon="ui-icon-closethick" update="tabelaCurso" />
                     <p:commandButton actionListener="#{cntrCurso.prepararalterarCurso()}" icon="ui-icon-pencil" oncomplete="PF('cursoDialog').show()" update=":formdialog:display" >
                     </p:commandButton>
                 </p:column>

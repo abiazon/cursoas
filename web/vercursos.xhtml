@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+    <h:head>
+        <title>Cursos:</title>
+        <link type="text/css" rel="stylesheet" href="/css/estilos.css" />
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <p:dataTable rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx"  style="width:100%" id="tabelaPessoa" value="#{cntrCurso.listarCursoVigente}" emptyMessage="Não há Registros" var="pes" paginator="false" rows="20" rowsPerPageTemplate="10,25,35,50">
+                <p:message id="messages"/>
+                <f:facet name="header">
+                    Lista de Cursos Disponíveis
+                </f:facet>
+                <p:column headerText="Curso" width="35%" filterMaxLength="40" sortBy="#{pes.nome}" filterBy="#{pes.nome}" filterStyle="max-width: 400px; min-width:400px;">
+                    <h:outputText value="#{pes.nome}"/>
+                </p:column>
+                <p:column headerText="Inicio Curso" width="35%" filterMaxLength="40" sortBy="#{pes.datainiciocurso}" filterBy="#{pes.datainiciocurso}" filterStyle="max-width: 400px; min-width:400px;">
+                    <h:outputText value="#{pes.datainiciocurso}">
+                        <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+                    </h:outputText>    
+                </p:column>
+                <p:column headerText="Instrutor" width="35%" filterMaxLength="40" sortBy="#{pes.professor}" filterBy="#{pes.professor}" filterStyle="max-width: 400px; min-width:400px;">
+                    <h:outputText value="#{pes.professor}"/>
+                </p:column>
+                <p:column style="width:32px;text-align: center">
+                    <p:commandButton oncomplete="PF('confirmacaoVer').show()" icon="ui-icon-search" title="View">
+                        <f:setPropertyActionListener value="#{pes}" target="#{cntrCurso.curso}" />
+                    </p:commandButton>
+                </p:column>           
+            </p:dataTable>    
+
+            <p:confirmDialog id="confirmacaoVerDialog" widgetVar="confirmacaoVer"
+                message="Deseja Visualizar Curso ?" header="Confirmar Visualização" 
+                severity="alert">
+                <p:button value="Não" onclick="PF('confirmacaoVer').hide(); return false;" />
+                <p:commandButton value="Sim" onclick="PF('confirmacaoVer').hide()" action="#{cntrCurso.informacoescurso()}" />
+            </p:confirmDialog>
+            
+            <p:dialog header="Curso Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                   <p:outputPanel id="carDetail" style="text-align:center;">
+                       <p:panelGrid  columns="2" rendered="#{not empty cntrCurso.curso}" columnClasses="label,value">
+                           <h:outputText value="Nome:" />
+                           <h:outputText value="#{cntrCurso.curso.nome}" />
+
+                           <h:outputText value="Inicio Matricula:" />
+                           <h:outputText value="#{cntrCurso.curso.datainiciocurso}" />
+
+                           <h:outputText value="Final Matricula:" />
+                           <h:outputText value="#{cntrCurso.curso.datafimmatricula}" />
+                           
+                           <h:outputText value="Professor:" />
+                           <h:outputText value="$#{cntrCurso.curso.professor}" />
+                       </p:panelGrid>
+                   </p:outputPanel>
+               </p:dialog>
+        </h:form>
+    </h:body>
+</html>

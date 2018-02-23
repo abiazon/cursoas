@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+    <h:head>
+        <title>Informações sobre o Curso</title>
+    </h:head>
+    <f:event listener="#{cntrCurso.testalogado()}" type="preRenderView" /> 
+    <h:body>
+        <h:form id="form">
+             <p:panel header="Dados do Curso">
+                <h:panelGrid columns="2" id="grid" width="100%" border="0" styleClass="comBordaSimples" >
+                    <h:outputText value="Curso" />
+                    <h:outputText id="nome" value="#{cntrCurso.curso.nome}" />
+                    <h:outputText value="Data Inicio Curso" />
+                    <h:outputText id="dtic" value="#{cntrCurso.curso.datainiciocurso}" >
+                        <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                    <h:outputText value="Horário Inicio " />
+                    <p:calendar id="hora" value="#{cntrCurso.curso.horario}" pattern="HH:mm" size="15" readonly="true"/>
+                    <h:outputText value="Data Inicio matricula" />
+                    <h:outputText id="dtim" value="#{cntrCurso.curso.datainiciomatricula}" >
+                        <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                    </h:outputText>   
+                    <h:outputText value="Data Fim Matricula" />
+                    <h:outputText id="dtfm" value="#{cntrCurso.curso.datafimmatricula}" >
+                        <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                    </h:outputText>    
+                    <h:outputText value="Valor R$" />
+                    <p:inputNumber id="vlr" value="#{cntrCurso.curso.valorcurso}" style="text-align:right" converter="javax.faces.Double" symbol="R$ " decimalSeparator="," thousandSeparator="." size="10" readonly="true"/>
+                    <h:outputText value="Instrutor" />
+                    <h:outputText id="prof" value="#{cntrCurso.curso.professor}" />
+                    <h:outputText value="Descrição" />
+                    <p:inputTextarea id="desc" value="#{cntrCurso.curso.descricaocurso}" autoResize="true" readonly="true"/>
+                    <h:panelGroup id="disabledBtnOverlay" styleClass="display: inline-block; position: relative;">
+                        <p:commandButton id="fade" value="Increver-se" disabled="#{cntrCurso.logado}" action="#{cntrCurso.inscreverCurso()}" icon="ui-icon-disk"/>
+                     </h:panelGroup>
+                    <p:tooltip for="disabledBtnOverlay" value="Faça Login para Increver-se" rendered="#{cntrCurso.logado}" position="top"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>

@@ -9,8 +9,6 @@ import javax.faces.model.DataModel;
 import modelo.Cidade;
 import modelo.Estado;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import modelo.Pessoa;
 
 
@@ -120,7 +118,7 @@ public class CntrPessoa {
 //        pessoa1 = (Pessoa) (listaPessoa.getRowData());
         pessoa1 = pessoa;
         dao = new PessoaDAO();
-        listacidade = new PessoaDAO().listCidade(pessoa1.getEstado());
+        listacidade = dao.listCidade(pessoa1.getEstado());
         nomeestado = dao.pegaestado(pessoa1.getEstado()).getnomeestado();
         System.out.println("pessoa posicionada:"+pessoa1.getNome()+" "+pessoa1.getId());
     }

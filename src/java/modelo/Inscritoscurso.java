@@ -1,6 +1,11 @@
 package modelo;
 // Generated 25/10/2017 08:09:13 by Hibernate Tools 4.3.1
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
 
 
 /**
@@ -8,14 +13,14 @@ package modelo;
  */
 public class Inscritoscurso  implements java.io.Serializable {
 
-
-     private int id;
-     private Integer idaluno;
-     private Integer idcurso;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_inscritocurso_id")
+    private int id;
+    private Integer idaluno;
+    private Integer idcurso;
 
     public Inscritoscurso() {
     }
-
 	
     public Inscritoscurso(int id) {
         this.id = id;
@@ -47,10 +52,6 @@ public class Inscritoscurso  implements java.io.Serializable {
     public void setIdcurso(Integer idcurso) {
         this.idcurso = idcurso;
     }
-
-
-
-
 }
 
 

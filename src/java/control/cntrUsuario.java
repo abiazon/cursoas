@@ -7,18 +7,16 @@ package control;
 
 import dao.PessoaDAO;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.hibernate.Session;
-import util.NewHibernateUtil;
+import modelo.Pessoa;
+
 
 
 /**
@@ -59,26 +57,34 @@ public class cntrUsuario {
 
     public void testausuario(){
         dao = new PessoaDAO();
-        if (dao.testausuario(usuario,senha).size()==1) {
+        List<Pessoa> lista;
+        lista = dao.testausuario(usuario,senha);
+        if (lista.size()==1) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Logado", null)); 
             FacesContext facesContext = FacesContext.getCurrentInstance();
             HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);				
             httpSession.setAttribute("autenticado", true);
             httpSession.setAttribute("usuario", usuario); 
+            httpSession.setAttribute("idusuario", lista.get(0).getId());
+            System.out.println("PAGINA:"+this.getPagina());
+            if ("infocurso.xhtml".equals(this.getPagina())){
+                System.out.println("tentando");
+                CntrCurso cc = new CntrCurso();
+                cc.inscreverCurso();
+            }
+            //return this.getPagina();     
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect(this.getPagina());
             } catch (IOException ex) {
                 Logger.getLogger(cntrUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("PAGINA:"+this.getPagina());
-            //return(this.getPagina());
        } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Apelido ou Senha inválidos", null)); 
             FacesContext facesContext = FacesContext.getCurrentInstance();
             HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);				
             httpSession.setAttribute("autenticado", false);				
             System.out.println("atributo NAO OK");
-            //return null;
+//            return "";
        }
     }
     
@@ -87,6 +93,7 @@ public class cntrUsuario {
         HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         httpSession.removeAttribute("autenticado");
         httpSession.removeAttribute("usuario");
+        httpSession.removeAttribute("idusuario");
         httpSession.invalidate(); 
         return "login.xhtml";
     }    

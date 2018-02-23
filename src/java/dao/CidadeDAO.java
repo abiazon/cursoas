@@ -22,7 +22,7 @@ public class CidadeDAO {
 public List listCidade(String idunidFed) {
         List lista = null;
         Transaction tx = null;
-        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
         try{
             tx = session.beginTransaction();
             String queryString = "from Cidade where idunidFed = :idToFind order by NomeDesc ";
@@ -34,7 +34,6 @@ public List listCidade(String idunidFed) {
         }finally{
             session.flush();
             session.close();
-            
         }  
         return lista;
     

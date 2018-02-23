@@ -24,7 +24,7 @@ import util.NewHibernateUtil;
 public class PessoaDAO {
     
     public void addPessoa(Pessoa pessoa) {
-        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         try {
             session.save(pessoa);
@@ -41,7 +41,7 @@ public class PessoaDAO {
     }
 
     public List<Pessoa> listPessoa() {
-        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
         List lista = session.createQuery("from Pessoa").list();
         session.flush();
         session.close();
@@ -50,7 +50,7 @@ public class PessoaDAO {
     
     public List<Cidade> listCidade(String estado) {
         System.out.println("listando cidade");
-        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
         String queryString = "from Cidade where idunidFed = :idToFind order by NomeDesc";
         Query query = session.createQuery(queryString);
         query.setString("idToFind", estado);
@@ -60,28 +60,28 @@ public class PessoaDAO {
         return listacidade;
     }
     
-    public List testausuario(String apelido, String senha){
-        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+    public List<Pessoa> testausuario(String apelido, String senha){
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
         String queryString = "from Pessoa where apelido= :apelToFind and senha= :senhaToFind";
         Query query = session.createQuery(queryString);
         query.setString("apelToFind", apelido);
         query.setString("senhaToFind", senha);
         List checalogin = query.list();
-session.flush();
-session.close();
+        session.flush();
+        session.close();
         return checalogin;
     }
     
     public List<Estado> listEstado() {
-        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
         List listaestado = session.createQuery("from Estado").list();
-session.flush();
-session.close();
+        session.flush();
+        session.close();
         return listaestado;
     }
     
     public void remove(Pessoa pessoa) {
-        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         try {
             session.delete(pessoa);
@@ -100,8 +100,7 @@ session.close();
     public void update(Pessoa pessoa) {
         FacesContext context = FacesContext.getCurrentInstance();
         RequestContext rc = RequestContext.getCurrentInstance();
-
-        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         try {
             session.update(pessoa);
@@ -122,7 +121,7 @@ session.close();
    
     public Pessoa getPessoaID(int idpessoa) {
         Pessoa pessoa = null;
-        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
         try{
             String queryString = "from Pessoa where idpessoa = :idToFind";
             Query query = session.createQuery(queryString);
@@ -139,19 +138,19 @@ session.close();
     
     public Estado pegaestado(String ufestado){
         Estado estado;
-        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
         String queryString = "from Estado where idunidFed = :idToFind ";
         Query query = session.createQuery(queryString);
         query.setString("idToFind", ufestado);
         estado = (Estado) query.uniqueResult();
-session.flush();
-session.close();
+        session.flush();
+        session.close();
         return estado;
     }
 
     public List<Pessoa> getPessoacpf(String cpf) {
         List listacpf=null;
-        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
         try{
             String queryString = "from Pessoa where cpf = :cpfToFind";
             Query query = session.createQuery(queryString);
@@ -170,7 +169,7 @@ session.close();
     public List<Pessoa> getPessoaapelido(String apelido) {
         //Pessoa pessoa=null;
         List<Pessoa> listaapelido=null;
-        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
         try{
             String queryString = "from Pessoa where apelido = :apelidoToFind";
             Query query = session.createQuery(queryString);
@@ -188,7 +187,7 @@ session.close();
     
     public List<Pessoa> getPessoaemail(String email) {
         List<Pessoa> listaemail=null;
-        Session session = NewHibernateUtil.buildSessionFactory().openSession();
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
         try{
             String queryString = "from Pessoa where email = :emailToFind";
             Query query = session.createQuery(queryString);

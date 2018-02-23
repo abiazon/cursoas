@@ -23,8 +23,8 @@
         <property name="datainiciocurso" type="date">
             <column name="datainiciocurso" length="13" />
         </property>
-        <property name="horario" type="date">
-            <column name="horario" length="13" />
+        <property name="horario" type="timestamp">
+            <column name="horario"  />
         </property>
         <property name="professor" type="string">
             <column name="professor" length="80" />

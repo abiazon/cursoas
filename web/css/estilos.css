@@ -33,3 +33,12 @@ and open the template in the editor.
 .link { 
  text-decoration:none; 
 } 
+.ui-datatable .ui-datatable-data .even-row td{
+    background-color:#EEDD82;
+}
+.ui-datatable .ui-datatable-data .odd-row td{
+    background-color:#FFFACD;
+}
+.ui-dialog, .ui-dialog-titlebar, .ui-dialog-title-dialog, .ui-dialog-titlebar-close, .ui-dialog-content, .ui-widget-content{
+    background-color: blue;
+}

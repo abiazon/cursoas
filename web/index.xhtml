@@ -7,7 +7,7 @@
 
     <f:view contentType="text/html">
 
-        <h:head>
+        <h:head >
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <link type="text/css" rel="stylesheet" href="/css/estilos.css" />
@@ -16,9 +16,12 @@
         </h:head>
 
         <h:body>
-            <p:layout fullPage="true">
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+            <p:layout fullPage="true" style="background-color: red;">
+                <p:layoutUnit styleClass=".ui-widget-content" position="north" size="40" resizable="false" closable="true" collapsible="true">
                     Header
+                    Ola: <h:outputText value="#{empty cntrUsuario.usuario ? 'Visitante !':cntrUsuario.usuario}" /> 
+                    <h:link styleClass="link" value="Entrar" outcome="login" />
+                    <h:link styleClass="link" value="Cadastre-se" outcome="pessoa" />
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
@@ -33,6 +36,7 @@
                                 <p:menuitem value="Cadastro de Curso" outcome="curso" />
                                 <p:menuitem value="Login" outcome="login" />
                                 <p:menuitem value="Mandar Email" outcome="email" />
+                                <p:menuitem value="Cursos Disponíveis" outcome="vercursos" />
                                 <p:menuitem value="Logout" action="#{cntrUsuario.sair()}"  icon="ui-icon-close" />
                             </p:submenu>
                         </p:menubar>
